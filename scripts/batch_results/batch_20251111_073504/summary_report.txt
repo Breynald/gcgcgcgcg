@@ -1,0 +1,35 @@
+BATCH OPTIMIZATION SUMMARY REPORT
+==================================================
+
+Timestamp: 2025-11-11 08:20:55.316736
+Model: /work/models/Qwen/Qwen2.5-1.5B-Instruct
+Target: C0pyr1ght
+Max table size: 1x1
+Optimization steps: 1000
+Probe sampling: False
+
+SIMPLE PROMPT RESULTS
+------------------------------
+Best loss: 2.9180
+Perplexity: 155.39
+Optimization time: 1293.93s
+Number of steps: 1000
+Optimized prompt: Here is a text: PYTHON Public copyright 
+Based on this text, output one word to describe it. Only output the word....
+
+TABLE OPTIMIZATION RESULTS
+------------------------------
+1x1: Loss=3.2266, PPL=101.97, Time=1453.77s
+
+SUMMARY STATISTICS
+--------------------
+Successful optimizations: 1/1
+Table perplexity stats:
+  Mean: 101.97
+  Std: 0.00
+  Min: 101.97
+  Max: 101.97
+  Median: 101.97
+
+Best table performance: table_1x1 (PPL: 101.97)
+Worst table performance: table_1x1 (PPL: 101.97)

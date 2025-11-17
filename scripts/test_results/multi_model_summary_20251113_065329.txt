@@ -1,0 +1,106 @@
+MULTI-MODEL OPTIMIZATION SUCCESS TEST REPORT
+============================================================
+
+Timestamp: 2025-11-13 06:53:29.278631
+Target: Copyright
+
+TARGET MODEL RESULTS:
+----------------------------------------
+
+Qwen (/work/models/Qwen/Qwen2.5-1.5B-Instruct):
+  Simple prompt: 100.00%
+
+  Table Prompts - Individual Results:
+  -----------------------------------
+  Table Size   Success Rate Samples  Successes 
+  -----------------------------------
+  5x5          100.00%      8        8         
+  5x4          100.00%      8        8         
+  5x3          100.00%      8        8         
+  5x2          100.00%      8        8         
+  5x1          100.00%      8        8         
+  4x4          100.00%      8        8         
+  4x3          100.00%      8        8         
+  4x2          100.00%      8        8         
+  4x1          100.00%      8        8         
+  3x5          100.00%      8        8         
+  3x3          100.00%      8        8         
+  3x2          100.00%      8        8         
+  3x1          100.00%      8        8         
+  2x5          100.00%      8        8         
+  2x4          100.00%      8        8         
+  2x2          100.00%      8        8         
+  2x1          100.00%      8        8         
+  1x5          100.00%      8        8         
+  1x4          100.00%      8        8         
+  1x3          100.00%      8        8         
+  1x2          100.00%      8        8         
+  1x1          100.00%      8        8         
+  4x5          0.00%        8        0         
+  3x4          0.00%        8        0         
+  2x3          0.00%        8        0         
+  -----------------------------------
+  Average Success Rate: 88.00%
+  Best Success Rate: 100.00%
+  Worst Success Rate: 0.00%
+  Successful Tables (>0%): 22/25
+
+
+FALSE POSITIVE MODEL RESULTS:
+----------------------------------------
+
+Llama3 (/work/models/meta-llama/Llama-3.1-8B-Instruct):
+  Simple prompt: 0.00% (False Positive Rate)
+
+  Table Prompts - Individual Results (False Positive Rates):
+  -----------------------------------
+  Table Size   FP Rate      Samples  False Pos 
+  -----------------------------------
+  5x5          0.00%        8        0         
+  5x4          0.00%        8        0         
+  5x3          0.00%        8        0         
+  5x2          0.00%        8        0         
+  5x1          0.00%        8        0         
+  4x5          0.00%        8        0         
+  4x4          0.00%        8        0         
+  4x3          0.00%        8        0         
+  4x2          0.00%        8        0         
+  4x1          0.00%        8        0         
+  3x5          0.00%        8        0         
+  3x4          0.00%        8        0         
+  3x3          0.00%        8        0         
+  3x2          0.00%        8        0         
+  3x1          0.00%        8        0         
+  2x5          0.00%        8        0         
+  2x4          0.00%        8        0         
+  2x3          0.00%        8        0         
+  1x5          0.00%        8        0         
+  1x4          0.00%        8        0         
+  1x3          0.00%        8        0         
+  1x2          0.00%        8        0         
+  1x1          0.00%        8        0         
+  2x2          100.00%      8        8         
+  2x1          100.00%      8        8         
+  -----------------------------------
+  Average FP Rate: 8.00%
+  Best FP Rate: 100.00%
+  Worst FP Rate: 0.00%
+  Tables with FPs: 2/25
+
+
+DETAILED COMPARISON TABLE:
+--------------------------------------------------------------------------------
+Model           Type         Simple     Table Avg    Best Table   Worst Table 
+--------------------------------------------------------------------------------
+Qwen            Target       100.00%    88.00%       100.00%      0.00%       
+Llama3          False Positive 0.00%      8.00%        100.00%      0.00%       
+
+
+BEST PERFORMING PROMPTS:
+----------------------------------------
+Top 5 Overall Success Rates:
+  1. Qwen - 5x5: 100.00% (Success Rate)
+  2. Qwen - 5x4: 100.00% (Success Rate)
+  3. Qwen - 5x3: 100.00% (Success Rate)
+  4. Qwen - 5x2: 100.00% (Success Rate)
+  5. Qwen - 5x1: 100.00% (Success Rate)

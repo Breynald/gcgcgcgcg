@@ -1,0 +1,43 @@
+BATCH OPTIMIZATION SUMMARY REPORT
+==================================================
+
+Timestamp: 2025-11-10 07:50:28.606363
+Model: /work/models/Qwen/Qwen2.5-1.5B-Instruct
+Target: Copyright
+Max table size: 3x3
+Optimization steps: 200
+Probe sampling: False
+
+SIMPLE PROMPT RESULTS
+------------------------------
+Best loss: 0.0013
+Perplexity: 240.65
+Optimization time: 274.11s
+Number of steps: 200
+Optimized prompt: Here is a text:  Segment asking Copyright 
+Based on this text, output one word to describe it. Only output the word....
+
+TABLE OPTIMIZATION RESULTS
+------------------------------
+1x1: Loss=0.0044, PPL=131.62, Time=310.24s
+1x2: Loss=0.0139, PPL=101.48, Time=347.80s
+1x3: Loss=0.0371, PPL=117.96, Time=584.94s
+2x1: Loss=0.0359, PPL=170.68, Time=364.24s
+2x2: Loss=0.2181, PPL=218.97, Time=654.02s
+2x3: Loss=0.1869, PPL=166.64, Time=593.89s
+3x1: Loss=0.0151, PPL=165.58, Time=403.40s
+3x2: Loss=0.3245, PPL=145.05, Time=585.23s
+3x3: Loss=0.1409, PPL=174.22, Time=817.90s
+
+SUMMARY STATISTICS
+--------------------
+Successful optimizations: 9/9
+Table perplexity stats:
+  Mean: 154.69
+  Std: 33.06
+  Min: 101.48
+  Max: 218.97
+  Median: 165.58
+
+Best table performance: table_1x2 (PPL: 101.48)
+Worst table performance: table_2x2 (PPL: 218.97)

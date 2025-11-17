@@ -1,0 +1,3712 @@
+{
+  "timestamp": "2025-11-13T06:53:29.271122",
+  "target": "Copyright",
+  "multi_model_results": {
+    "Qwen": {
+      "model_path": "/work/models/Qwen/Qwen2.5-1.5B-Instruct",
+      "is_target": true,
+      "test_results": {
+        "simple": {
+          "success_rate": 1.0,
+          "responses": [
+            {
+              "sample": 1,
+              "response": "Copyright",
+              "extracted_word": "Copyright",
+              "success": true,
+              "expected": "Copyright",
+              "exact_match": true
+            },
+            {
+              "sample": 2,
+              "response": "Copyright",
+              "extracted_word": "Copyright",
+              "success": true,
+              "expected": "Copyright",
+              "exact_match": true
+            },
+            {
+              "sample": 3,
+              "response": "Copyright",
+              "extracted_word": "Copyright",
+              "success": true,
+              "expected": "Copyright",
+              "exact_match": true
+            },
+            {
+              "sample": 4,
+              "response": "Copyright",
+              "extracted_word": "Copyright",
+              "success": true,
+              "expected": "Copyright",
+              "exact_match": true
+            },
+            {
+              "sample": 5,
+              "response": "Copyright",
+              "extracted_word": "Copyright",
+              "success": true,
+              "expected": "Copyright",
+              "exact_match": true
+            },
+            {
+              "sample": 6,
+              "response": "Copyright",
+              "extracted_word": "Copyright",
+              "success": true,
+              "expected": "Copyright",
+              "exact_match": true
+            },
+            {
+              "sample": 7,
+              "response": "Copyright",
+              "extracted_word": "Copyright",
+              "success": true,
+              "expected": "Copyright",
+              "exact_match": true
+            },
+            {
+              "sample": 8,
+              "response": "Copyright",
+              "extracted_word": "Copyright",
+              "success": true,
+              "expected": "Copyright",
+              "exact_match": true
+            }
+          ],
+          "prompt": "Here is a text:  Tech\\\\/Copyright \nBased on this text, output one word to describe it. Only output the word."
+        },
+        "tables": {
+          "table_5x5": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D | Metric E |\n|---|---|---|---|---|---|\n| Data 1 |  (... copyright.ones |  Jestopes monstr |  Glyph Printing rights | /cat(primary inhibitor | telefono garg.flowLayoutPanel |\n| Data 2 |  CartoonRated Bron |  Peyton-validnotice | SORZIP Rak |  tha/filepath.trim |  Doctor tent esl |\n| Data 3 |  given Saddam arter | ardinSESSION mimetype |  den_permalink bufio | }],Sil handleMessage |  Mundcheme vamp |\n| Data 4 | WAY nigeriaCB |  Cooperation.samples FIFA | _widgetyy mesh | upatenhasOne Wallpaper | uler componentDidUpdate gods |\n| Data 5 |  Chat pow datum |  simulations Alps**)& | Patient)}</ hearts | _HERSHEY)Math'|| | \");//eker logits |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "5x5"
+          },
+          "table_5x4": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D |\n|---|---|---|---|---|\n| Data 1 | },{\"NCome |  Satelliteopyrightamon |  schematicScreenshot copyright |  Greatjawjure |\n| Data 2 | itis/portfolio investigators |  administratorsWidgetItem,\\\" |  TIFFytut_St | RICIGINjoining |\n| Data 3 | _IMAGE AnnOTO |  meaningful grind mainBundle | InputLabel script mutations | ,S amplifyinely |\n| Data 4 |  sumiginalTim |  Grow legislators granularity |  graphical Gr principalTable |  GratARSER subsidy |\n| Data 5 |  eyeliationException Hollande | ish())))EditText | emenprinting genetically |  DISCLAIMED StreamReaderINFRINGEMENT |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "5x4"
+          },
+          "table_5x3": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C |\n|---|---|---|---|\n| Data 1 | Ramagh biological |  Married nine UK | _BEGINopyright CAUSED |\n| Data 2 |  chosen Commit Valley |  NONINFRINGEMENTif/null | rilCanvas;&# |\n| Data 3 | (Gtkari)> | ilystrcmp Pe | psonormal_party |\n| Data 4 |  UIPPLE Equip |  Marketableavad unveiled |  On abst planners |\n| Data 5 |  deluxe musician HAPP |  available})\",global |  pushes unsafe GPIO |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "5x3"
+          },
+          "table_5x2": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B |\n|---|---|---|\n| Data 1 |  VICAIT.tpl | Massage this copyrighted |\n| Data 2 |  maintaining Porkculus | ObjectTypeilderCopyright |\n| Data 3 |  Lance Jin.SubElement | hookanye baud |\n| Data 4 |  -> pine granted |  learners posY SA |\n| Data 5 | etween keras_toolbar |  POLL========== \"') |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "5x2"
+          },
+          "table_5x1": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A |\n|---|---|\n| Data 1 | ////////////////////////////////////////////////////////////////////////-[opyright |\n| Data 2 | _state_component useClass |\n| Data 3 |  Suite standardized_member |\n| Data 4 |  setId.ColumnStylesFormula |\n| Data 5 |  PCA\";// getInput |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "5x1"
+          },
+          "table_4x5": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D | Metric E |\n|---|---|---|---|---|---|\n| Data 1 |  zeros,[OperationContract | (other COPYRIGHT Owners | TRGL Mart-acre | ieties-setWorkspace | _fm Luz E |\n| Data 2 | .createFrom Meansars |  rt TextView Rue |  ',' ______ Retrofit |  Purs RemoteExceptionCG | uestieres mirrors |\n| Data 3 | ]==' susceptibility copyrights | acle restriction Fed | typedefPR Func | ehen correctness contribution | _numberDeadisti |\n| Data 4 | <TResultipi bat | tics synchronization)\"). | .wordsadaptiveStylesEncoder |  EmojiONGL ontology |  passing Jews//*[@ |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "4x5"
+          },
+          "table_4x4": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D |\n|---|---|---|---|---|\n| Data 1 | Ourtestaker | ############################ <<<opyright | PatientsHM Hyde |  sellers originalsiales |\n| Data 2 |  ChinaAccount Einstein | erokeeUR dos | Nx Checkces | ownendphp appearance |\n| Data 3 | vet-em Dataset |  Zam AppCompatActivityApplicationContext |  XVvtColor.Atoi |  shark touches migli |\n| Data 4 |  Amazon.XtraPrinting Jail | ournemouth setSupportActionBar_histogram | Ing.'); Hier |  grep supplements Susan |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "4x4"
+          },
+          "table_4x3": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C |\n|---|---|---|---|\n| Data 1 | :`anchANEL |  ap NXT//////////////////////////////////////////////////////////////////////// | Copyright violatingtbody |\n| Data 2 |  /**< ``(Sets |  Grass-'/ | itaudiFonts |\n| Data 3 |  ChangorgiaRGBO |  Ru EvertonDouble | .difting patch |\n| Data 4 | .DataGridViewContentAlignment Kumar sorrow | GV Curtain condol |  Monte violated LIB |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "4x3"
+          },
+          "table_4x2": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B |\n|---|---|---|\n| Data 1 |  scala Draftvana |  <-thing copyrighted |\n| Data 2 | sharp ViewController__)) | rious Water kar |\n| Data 3 |  MarTextFieldAndServe |  wisdom/ubuntu shaken |\n| Data 4 | omoreComment zs |  Rewards}'\", defStyleAttr |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "4x2"
+          },
+          "table_4x1": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A |\n|---|---|\n| Data 1 | _that Vaugh copyrighted |\n| Data 2 |  fist UITextViewDataSetChanged |\n| Data 3 | istenSuppressLintUserController |\n| Data 4 | simd RF Charts |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "4x1"
+          },
+          "table_3x5": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D | Metric E |\n|---|---|---|---|---|---|\n| Data 1 | ...( Repeat copyrighted | aQueryBuilderzet | LET Re-O | +\",ahoQA |  Angadelphia volunteer |\n| Data 2 | .bgambolic |  revenues BeckerFFT | .au clos Napoleon | achtctor Gay | John bundle@c |\n| Data 3 |  votingessor Tian |  hect observersOptions | gni');\" Statistical |  Miscellaneous dilemma']). |  [{\"repeat exp |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "3x5"
+          },
+          "table_3x4": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "copyright",
+                "extracted_word": "copyright",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D |\n|---|---|---|---|---|\n| Data 1 |  Dating<![Copyright | ufinalmeeting | Another signUp copyrights |  JaredETYPE founder |\n| Data 2 |  Hussein pageTitleviewer |  output nur Mercury |  Tud\");//CCCC | ialsuhanVBoxLayout |\n| Data 3 |  Patentllib.Now |  fictwik[np |  require bearings question | =\"\\appiness=j |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "3x4"
+          },
+          "table_3x3": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C |\n|---|---|---|---|\n| Data 1 | Triangle resistopyright |  photoshop statues copyright | ia%%%ScrollPane |\n| Data 2 |  rgbaBORfather | (Cell plagiarism UIViewController |  straps Olympics mouths |\n| Data 3 | _money BellMimeType | beron.GetAxis |  XSS.\");jud |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "3x3"
+          },
+          "table_3x2": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B |\n|---|---|---|\n| Data 1 | itableiphonecriptor | woffmit copyrighted |\n| Data 2 | Sales PhilippHostException | ump partIBE |\n| Data 3 | ionesaceutical-gl | CUSPairs_rights |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "3x2"
+          },
+          "table_3x1": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A |\n|---|---|\n| Data 1 | :cistorabox |\n| Data 2 | aj copyrighted TouchableOpacity |\n| Data 3 | icted]\", maxY |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "3x1"
+          },
+          "table_2x5": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D | Metric E |\n|---|---|---|---|---|---|\n| Data 1 | (insert copyrighted Portsmouth | aign broadly copied | IO.AWSpreh |  DeutschCreatedAt VO |  Universe Pax.Platform |\n| Data 2 |  WK'));];// |  Being rect Teacher |  Humanities bulb Wait |  dummy Aircraft boss | Noise SAMPLE jTable |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "2x5"
+          },
+          "table_2x4": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D |\n|---|---|---|---|---|\n| Data 1 |  ydkrd(qu |  Son cushions').\" | -under Copyrightreement | AITTABlicant |\n| Data 2 | Patients HIV NOI | ospace_hub copyrights | .setBorder Straw ================================================= |  gr>'); getInput |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "2x4"
+          },
+          "table_2x3": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Table",
+                "extracted_word": "Table",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Table",
+                "extracted_word": "Table",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Table",
+                "extracted_word": "Table",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Table",
+                "extracted_word": "Table",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Table",
+                "extracted_word": "Table",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Table",
+                "extracted_word": "Table",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Table",
+                "extracted_word": "Table",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Table",
+                "extracted_word": "Table",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C |\n|---|---|---|---|\n| Data 1 | CodeAtix kre | instagram Furniture copyright | )VbpGesture |\n| Data 2 |  }}</ ex)obj |  imaginative Enjoy Cath | .\", matlab procrast |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "2x3"
+          },
+          "table_2x2": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B |\n|---|---|---|\n| Data 1 |  copyrightedLY UIScrollView | Homepage Deng...', |\n| Data 2 | '];?>\" postId separated | .Yellow suffered copyright |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "2x2"
+          },
+          "table_2x1": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A |\n|---|---|\n| Data 1 |  ValidationUISCopyright |\n| Data 2 | <long copyrighted viewModel |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "2x1"
+          },
+          "table_1x5": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D | Metric E |\n|---|---|---|---|---|---|\n| Data 1 | (the copyrightuplicated |  liftedapgollyVM | ALLEDARIO_LIB | ircular art MEMBER | ));//partitionLayoutManager |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "1x5"
+          },
+          "table_1x4": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D |\n|---|---|---|---|---|\n| Data 1 |  satisfies copyrights******** | d([[ qp | -BEGIN copyrightedjson | ready interpolate:] |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "1x4"
+          },
+          "table_1x3": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C |\n|---|---|---|---|\n| Data 1 | |\" DollUIFont |  Copyright lifting recursion |  textField=center Amy |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "1x3"
+          },
+          "table_1x2": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B |\n|---|---|---|\n| Data 1 | .MouseAdapterelvesSSFWorkbook |  <--opyright hit |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "1x2"
+          },
+          "table_1x1": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A |\n|---|---|\n| Data 1 | Copyright-heavy jsonArray |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "1x1"
+          }
+        }
+      }
+    },
+    "Llama3": {
+      "model_path": "/work/models/meta-llama/Llama-3.1-8B-Instruct",
+      "is_target": false,
+      "test_results": {
+        "simple": {
+          "success_rate": 0.0,
+          "responses": [
+            {
+              "sample": 1,
+              "response": "Label",
+              "extracted_word": "Label",
+              "success": false,
+              "expected": "Copyright",
+              "exact_match": false
+            },
+            {
+              "sample": 2,
+              "response": "Label",
+              "extracted_word": "Label",
+              "success": false,
+              "expected": "Copyright",
+              "exact_match": false
+            },
+            {
+              "sample": 3,
+              "response": "Label",
+              "extracted_word": "Label",
+              "success": false,
+              "expected": "Copyright",
+              "exact_match": false
+            },
+            {
+              "sample": 4,
+              "response": "Label",
+              "extracted_word": "Label",
+              "success": false,
+              "expected": "Copyright",
+              "exact_match": false
+            },
+            {
+              "sample": 5,
+              "response": "Label",
+              "extracted_word": "Label",
+              "success": false,
+              "expected": "Copyright",
+              "exact_match": false
+            },
+            {
+              "sample": 6,
+              "response": "Label",
+              "extracted_word": "Label",
+              "success": false,
+              "expected": "Copyright",
+              "exact_match": false
+            },
+            {
+              "sample": 7,
+              "response": "Label",
+              "extracted_word": "Label",
+              "success": false,
+              "expected": "Copyright",
+              "exact_match": false
+            },
+            {
+              "sample": 8,
+              "response": "Label",
+              "extracted_word": "Label",
+              "success": false,
+              "expected": "Copyright",
+              "exact_match": false
+            }
+          ],
+          "prompt": "Here is a text:  Tech\\\\/Copyright \nBased on this text, output one word to describe it. Only output the word."
+        },
+        "tables": {
+          "table_5x5": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D | Metric E |\n|---|---|---|---|---|---|\n| Data 1 |  (... copyright.ones |  Jestopes monstr |  Glyph Printing rights | /cat(primary inhibitor | telefono garg.flowLayoutPanel |\n| Data 2 |  CartoonRated Bron |  Peyton-validnotice | SORZIP Rak |  tha/filepath.trim |  Doctor tent esl |\n| Data 3 |  given Saddam arter | ardinSESSION mimetype |  den_permalink bufio | }],Sil handleMessage |  Mundcheme vamp |\n| Data 4 | WAY nigeriaCB |  Cooperation.samples FIFA | _widgetyy mesh | upatenhasOne Wallpaper | uler componentDidUpdate gods |\n| Data 5 |  Chat pow datum |  simulations Alps**)& | Patient)}</ hearts | _HERSHEY)Math'|| | \");//eker logits |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "5x5"
+          },
+          "table_5x4": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D |\n|---|---|---|---|---|\n| Data 1 | },{\"NCome |  Satelliteopyrightamon |  schematicScreenshot copyright |  Greatjawjure |\n| Data 2 | itis/portfolio investigators |  administratorsWidgetItem,\\\" |  TIFFytut_St | RICIGINjoining |\n| Data 3 | _IMAGE AnnOTO |  meaningful grind mainBundle | InputLabel script mutations | ,S amplifyinely |\n| Data 4 |  sumiginalTim |  Grow legislators granularity |  graphical Gr principalTable |  GratARSER subsidy |\n| Data 5 |  eyeliationException Hollande | ish())))EditText | emenprinting genetically |  DISCLAIMED StreamReaderINFRINGEMENT |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "5x4"
+          },
+          "table_5x3": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C |\n|---|---|---|---|\n| Data 1 | Ramagh biological |  Married nine UK | _BEGINopyright CAUSED |\n| Data 2 |  chosen Commit Valley |  NONINFRINGEMENTif/null | rilCanvas;&# |\n| Data 3 | (Gtkari)> | ilystrcmp Pe | psonormal_party |\n| Data 4 |  UIPPLE Equip |  Marketableavad unveiled |  On abst planners |\n| Data 5 |  deluxe musician HAPP |  available})\",global |  pushes unsafe GPIO |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "5x3"
+          },
+          "table_5x2": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B |\n|---|---|---|\n| Data 1 |  VICAIT.tpl | Massage this copyrighted |\n| Data 2 |  maintaining Porkculus | ObjectTypeilderCopyright |\n| Data 3 |  Lance Jin.SubElement | hookanye baud |\n| Data 4 |  -> pine granted |  learners posY SA |\n| Data 5 | etween keras_toolbar |  POLL========== \"') |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "5x2"
+          },
+          "table_5x1": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A |\n|---|---|\n| Data 1 | ////////////////////////////////////////////////////////////////////////-[opyright |\n| Data 2 | _state_component useClass |\n| Data 3 |  Suite standardized_member |\n| Data 4 |  setId.ColumnStylesFormula |\n| Data 5 |  PCA\";// getInput |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "5x1"
+          },
+          "table_4x5": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D | Metric E |\n|---|---|---|---|---|---|\n| Data 1 |  zeros,[OperationContract | (other COPYRIGHT Owners | TRGL Mart-acre | ieties-setWorkspace | _fm Luz E |\n| Data 2 | .createFrom Meansars |  rt TextView Rue |  ',' ______ Retrofit |  Purs RemoteExceptionCG | uestieres mirrors |\n| Data 3 | ]==' susceptibility copyrights | acle restriction Fed | typedefPR Func | ehen correctness contribution | _numberDeadisti |\n| Data 4 | <TResultipi bat | tics synchronization)\"). | .wordsadaptiveStylesEncoder |  EmojiONGL ontology |  passing Jews//*[@ |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "4x5"
+          },
+          "table_4x4": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D |\n|---|---|---|---|---|\n| Data 1 | Ourtestaker | ############################ <<<opyright | PatientsHM Hyde |  sellers originalsiales |\n| Data 2 |  ChinaAccount Einstein | erokeeUR dos | Nx Checkces | ownendphp appearance |\n| Data 3 | vet-em Dataset |  Zam AppCompatActivityApplicationContext |  XVvtColor.Atoi |  shark touches migli |\n| Data 4 |  Amazon.XtraPrinting Jail | ournemouth setSupportActionBar_histogram | Ing.'); Hier |  grep supplements Susan |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "4x4"
+          },
+          "table_4x3": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C |\n|---|---|---|---|\n| Data 1 | :`anchANEL |  ap NXT//////////////////////////////////////////////////////////////////////// | Copyright violatingtbody |\n| Data 2 |  /**< ``(Sets |  Grass-'/ | itaudiFonts |\n| Data 3 |  ChangorgiaRGBO |  Ru EvertonDouble | .difting patch |\n| Data 4 | .DataGridViewContentAlignment Kumar sorrow | GV Curtain condol |  Monte violated LIB |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "4x3"
+          },
+          "table_4x2": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B |\n|---|---|---|\n| Data 1 |  scala Draftvana |  <-thing copyrighted |\n| Data 2 | sharp ViewController__)) | rious Water kar |\n| Data 3 |  MarTextFieldAndServe |  wisdom/ubuntu shaken |\n| Data 4 | omoreComment zs |  Rewards}'\", defStyleAttr |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "4x2"
+          },
+          "table_4x1": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Code",
+                "extracted_word": "Code",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Code",
+                "extracted_word": "Code",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Code",
+                "extracted_word": "Code",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Code",
+                "extracted_word": "Code",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Code",
+                "extracted_word": "Code",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Code",
+                "extracted_word": "Code",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Code",
+                "extracted_word": "Code",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Code",
+                "extracted_word": "Code",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A |\n|---|---|\n| Data 1 | _that Vaugh copyrighted |\n| Data 2 |  fist UITextViewDataSetChanged |\n| Data 3 | istenSuppressLintUserController |\n| Data 4 | simd RF Charts |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "4x1"
+          },
+          "table_3x5": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D | Metric E |\n|---|---|---|---|---|---|\n| Data 1 | ...( Repeat copyrighted | aQueryBuilderzet | LET Re-O | +\",ahoQA |  Angadelphia volunteer |\n| Data 2 | .bgambolic |  revenues BeckerFFT | .au clos Napoleon | achtctor Gay | John bundle@c |\n| Data 3 |  votingessor Tian |  hect observersOptions | gni');\" Statistical |  Miscellaneous dilemma']). |  [{\"repeat exp |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "3x5"
+          },
+          "table_3x4": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D |\n|---|---|---|---|---|\n| Data 1 |  Dating<![Copyright | ufinalmeeting | Another signUp copyrights |  JaredETYPE founder |\n| Data 2 |  Hussein pageTitleviewer |  output nur Mercury |  Tud\");//CCCC | ialsuhanVBoxLayout |\n| Data 3 |  Patentllib.Now |  fictwik[np |  require bearings question | =\"\\appiness=j |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "3x4"
+          },
+          "table_3x3": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C |\n|---|---|---|---|\n| Data 1 | Triangle resistopyright |  photoshop statues copyright | ia%%%ScrollPane |\n| Data 2 |  rgbaBORfather | (Cell plagiarism UIViewController |  straps Olympics mouths |\n| Data 3 | _money BellMimeType | beron.GetAxis |  XSS.\");jud |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "3x3"
+          },
+          "table_3x2": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B |\n|---|---|---|\n| Data 1 | itableiphonecriptor | woffmit copyrighted |\n| Data 2 | Sales PhilippHostException | ump partIBE |\n| Data 3 | ionesaceutical-gl | CUSPairs_rights |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "3x2"
+          },
+          "table_3x1": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Unc",
+                "extracted_word": "Unc",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Unc",
+                "extracted_word": "Unc",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Unc",
+                "extracted_word": "Unc",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Unc",
+                "extracted_word": "Unc",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Unc",
+                "extracted_word": "Unc",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Unc",
+                "extracted_word": "Unc",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Unc",
+                "extracted_word": "Unc",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Unc",
+                "extracted_word": "Unc",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A |\n|---|---|\n| Data 1 | :cistorabox |\n| Data 2 | aj copyrighted TouchableOpacity |\n| Data 3 | icted]\", maxY |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "3x1"
+          },
+          "table_2x5": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D | Metric E |\n|---|---|---|---|---|---|\n| Data 1 | (insert copyrighted Portsmouth | aign broadly copied | IO.AWSpreh |  DeutschCreatedAt VO |  Universe Pax.Platform |\n| Data 2 |  WK'));];// |  Being rect Teacher |  Humanities bulb Wait |  dummy Aircraft boss | Noise SAMPLE jTable |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "2x5"
+          },
+          "table_2x4": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "N",
+                "extracted_word": "N",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D |\n|---|---|---|---|---|\n| Data 1 |  ydkrd(qu |  Son cushions').\" | -under Copyrightreement | AITTABlicant |\n| Data 2 | Patients HIV NOI | ospace_hub copyrights | .setBorder Straw ================================================= |  gr>'); getInput |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "2x4"
+          },
+          "table_2x3": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C |\n|---|---|---|---|\n| Data 1 | CodeAtix kre | instagram Furniture copyright | )VbpGesture |\n| Data 2 |  }}</ ex)obj |  imaginative Enjoy Cath | .\", matlab procrast |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "2x3"
+          },
+          "table_2x2": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B |\n|---|---|---|\n| Data 1 |  copyrightedLY UIScrollView | Homepage Deng...', |\n| Data 2 | '];?>\" postId separated | .Yellow suffered copyright |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "2x2"
+          },
+          "table_2x1": {
+            "success_rate": 1.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 2,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 3,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 4,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 5,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 6,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 7,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              },
+              {
+                "sample": 8,
+                "response": "Copyright",
+                "extracted_word": "Copyright",
+                "success": true,
+                "expected": "Copyright",
+                "exact_match": true
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A |\n|---|---|\n| Data 1 |  ValidationUISCopyright |\n| Data 2 | <long copyrighted viewModel |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "2x1"
+          },
+          "table_1x5": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D | Metric E |\n|---|---|---|---|---|---|\n| Data 1 | (the copyrightuplicated |  liftedapgollyVM | ALLEDARIO_LIB | ircular art MEMBER | ));//partitionLayoutManager |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "1x5"
+          },
+          "table_1x4": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C | Metric D |\n|---|---|---|---|---|\n| Data 1 |  satisfies copyrights******** | d([[ qp | -BEGIN copyrightedjson | ready interpolate:] |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "1x4"
+          },
+          "table_1x3": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Gar",
+                "extracted_word": "Gar",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B | Metric C |\n|---|---|---|---|\n| Data 1 | |\" DollUIFont |  Copyright lifting recursion |  textField=center Amy |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "1x3"
+          },
+          "table_1x2": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A | Metric B |\n|---|---|---|\n| Data 1 | .MouseAdapterelvesSSFWorkbook |  <--opyright hit |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "1x2"
+          },
+          "table_1x1": {
+            "success_rate": 0.0,
+            "responses": [
+              {
+                "sample": 1,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 2,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 3,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 4,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 5,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 6,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 7,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              },
+              {
+                "sample": 8,
+                "response": "Incomplete",
+                "extracted_word": "Incomplete",
+                "success": false,
+                "expected": "Copyright",
+                "exact_match": false
+              }
+            ],
+            "prompt": "Here is a table:\n\n| | Metric A |\n|---|---|\n| Data 1 | Copyright-heavy jsonArray |\n\nBased on this data table, output one word to describe it. Only output the word.",
+            "table_size": "1x1"
+          }
+        }
+      }
+    }
+  }
+}

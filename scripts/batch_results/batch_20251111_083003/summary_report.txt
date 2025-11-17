@@ -1,0 +1,59 @@
+BATCH OPTIMIZATION SUMMARY REPORT
+==================================================
+
+Timestamp: 2025-11-11 13:15:40.245771
+Model: /work/models/Qwen/Qwen2.5-1.5B-Instruct
+Target: Copyright
+Max table size: 5x5
+Optimization steps: 300
+Probe sampling: False
+
+SIMPLE PROMPT RESULTS
+------------------------------
+Best loss: 0.0005
+Perplexity: 269.31
+Optimization time: 376.98s
+Number of steps: 300
+Optimized prompt: Here is a text:  Tech\\/Copyright 
+Based on this text, output one word to describe it. Only output the word....
+
+TABLE OPTIMIZATION RESULTS
+------------------------------
+5x5: Loss=0.1569, PPL=361.98, Time=807.36s
+5x4: Loss=0.2170, PPL=289.96, Time=772.61s
+5x3: Loss=0.1520, PPL=223.75, Time=808.98s
+5x2: Loss=0.0978, PPL=197.41, Time=715.79s
+5x1: Loss=0.0447, PPL=89.19, Time=688.48s
+4x5: Loss=1.9629, PPL=253.34, Time=691.48s
+4x4: Loss=0.1836, PPL=259.09, Time=725.57s
+4x3: Loss=0.1752, PPL=258.89, Time=700.65s
+4x2: Loss=0.1000, PPL=215.49, Time=676.57s
+4x1: Loss=0.0561, PPL=157.28, Time=583.62s
+3x5: Loss=0.2485, PPL=265.10, Time=730.53s
+3x4: Loss=0.3562, PPL=206.84, Time=750.63s
+3x3: Loss=0.2220, PPL=180.37, Time=755.48s
+3x2: Loss=0.1373, PPL=182.32, Time=651.75s
+3x1: Loss=0.0181, PPL=140.93, Time=522.92s
+2x5: Loss=0.1733, PPL=183.53, Time=751.81s
+2x4: Loss=0.2438, PPL=200.68, Time=653.26s
+2x3: Loss=0.1980, PPL=168.48, Time=699.27s
+2x2: Loss=0.0735, PPL=208.28, Time=568.41s
+2x1: Loss=0.0244, PPL=149.59, Time=478.67s
+1x5: Loss=0.1675, PPL=83.66, Time=716.87s
+1x4: Loss=0.1730, PPL=87.25, Time=867.02s
+1x3: Loss=0.0355, PPL=97.80, Time=537.65s
+1x2: Loss=0.0091, PPL=138.58, Time=476.41s
+1x1: Loss=0.0046, PPL=103.52, Time=424.25s
+
+SUMMARY STATISTICS
+--------------------
+Successful optimizations: 25/25
+Table perplexity stats:
+  Mean: 188.13
+  Std: 68.60
+  Min: 83.66
+  Max: 361.98
+  Median: 183.53
+
+Best table performance: table_1x5 (PPL: 83.66)
+Worst table performance: table_5x5 (PPL: 361.98)
