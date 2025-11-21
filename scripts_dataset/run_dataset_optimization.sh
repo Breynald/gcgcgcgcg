@@ -11,7 +11,7 @@ MAX_ROWS=""  # Empty means no limit
 NUM_STEPS=1000
 DEVICE="cuda"
 DTYPE="float16"
-GPU_ID="7"
+GPU_ID="4"
 EARLY_STOP_CONFIDENCE="0.3"
 
 # Function to display usage

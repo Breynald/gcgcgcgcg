@@ -35,6 +35,24 @@ if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
 
 
+def log_loss_transform(thinking_length: float, scale_factor: float = 0.1) -> float:
+    """
+    使用对数变换将思考长度转换为损失值，范围在(0, 1]之间
+
+    Args:
+        thinking_length: 思考内容的token数量
+        scale_factor: 缩放因子，控制对数变换的影响程度
+
+    Returns:
+        变换后的损失值，范围在(0, 1]之间，思考长度越长，损失越接近0
+        当thinking_length=0时，损失为1.0；随着thinking_length增长，损失单调递减
+    """
+    # 使用 log1p(thinking_length * scale_factor) 避免log(0)问题
+    # 损失 = 1 / (1 + log1p(thinking_length * scale_factor))
+    transformed_loss = 1.0 / (1.0 + torch.log1p(torch.tensor(thinking_length * scale_factor)))
+    return float(transformed_loss)
+
+
 def extract_thinking_content(generated_text: str, start_tag: str = "<thinking>", end_tag: str = "</thinking>") -> str:
     """Extract content between thinking tags from generated text.
 
@@ -73,7 +91,7 @@ class GCGConfig:
     use_mellowmax: bool = False
     mellowmax_alpha: float = 1.0
     early_stop: bool = False
-    use_prefix_cache: bool = False  # Disable to avoid complications
+    use_prefix_cache: bool = True  # Enable prefix caching for better performance
     allow_non_ascii: bool = False
     filter_ids: bool = True
     add_space_before_target: bool = False
@@ -82,6 +100,15 @@ class GCGConfig:
     max_generation_tokens: int = 200  # Maximum tokens to generate
     thinking_start_tag: str = "<thinking>"  # Customizable thinking start tag
     thinking_end_tag: str = "</thinking>"    # Customizable thinking end tag
+    # Log loss transformation parameters
+    loss_scale_factor: float = 0.01  # Controls log transformation intensity
+
+    # Early stopping parameters
+    consecutive_threshold: int = 3  # Number of consecutive times reaching max length to trigger early stop
+
+    # Performance optimization parameters
+    use_batch_generation: bool = True  # Enable batch text generation
+    max_batch_size: int = 8  # Maximum batch size for batch generation to avoid OOM
 
 
 @dataclass
@@ -119,13 +146,7 @@ class AttackBuffer:
         return self.buffer[-1][0]
 
     def log_buffer(self, tokenizer):
-        message = "buffer:"
-        for loss, ids in self.buffer:
-            optim_str = tokenizer.batch_decode(ids)[0]
-            optim_str = optim_str.replace("\\", "\\\\")
-            optim_str = optim_str.replace("\n", "\\n")
-            message += f"\nloss: {loss}" + f" | string: {optim_str}"
-        logger.info(message)
+        pass  # 主循环中已经输出了更详细的信息
 
 
 def sample_ids_from_grad(
@@ -187,6 +208,9 @@ class GCGThinking:
         self._start_tag_ids = tokenizer.encode(config.thinking_start_tag, add_special_tokens=False)
         self._end_tag_ids = tokenizer.encode(config.thinking_end_tag, add_special_tokens=False)
 
+        # Prefix caching using transformers KV cache mechanism
+        self.prefix_cache = None if not config.use_prefix_cache else None  # Will be populated during run
+
         if model.dtype in (torch.float32, torch.float64):
             logger.warning(f"Model is in {model.dtype}. Use a lower precision data type, if possible, for much faster optimization.")
 
@@ -232,6 +256,68 @@ class GCGThinking:
 
         return end_idx - start_idx
 
+    def _setup_prefix_cache(self):
+        """Setup KV cache for prefix optimization"""
+        if self.prefix_cache is None and self.config.use_prefix_cache:
+            with torch.no_grad():
+                try:
+                    # Pre-compute cache for the prefix (before_str)
+                    output = self.model(inputs_embeds=self.before_embeds, use_cache=True)
+                    self.prefix_cache = output.past_key_values
+                    self.cache_format = "standard"  # Standard transformer format
+
+                    # Test if cache works with a simple call
+                    test_embeds = self.after_embeds[:1] if self.after_embeds.shape[0] > 0 else self.embedding_layer(torch.tensor([[1]]))
+                    try:
+                        self._apply_prefix_cache(self.model, test_embeds, batch_size=1)
+                        logger.info("Prefix cache enabled for performance optimization")
+                    except Exception as test_error:
+                        logger.warning(f"Prefix cache test failed: {test_error}")
+                        logger.warning("Disabling prefix cache due to compatibility issues")
+                        self.prefix_cache = None
+
+                except Exception as e:
+                    logger.warning(f"Failed to setup prefix cache: {e}")
+                    logger.warning("Disabling prefix cache due to compatibility issues")
+                    self.prefix_cache = None
+
+    def _apply_prefix_cache(self, model, inputs_embeds, batch_size=None):
+        """Apply prefix cache if available"""
+        if self.prefix_cache is not None:
+            try:
+                # Only pass the embeddings after the prefix
+                if batch_size is None:
+                    batch_size = inputs_embeds.shape[0]
+
+                # Check if we can slice the embeddings properly
+                if inputs_embeds.shape[1] <= self.before_embeds.shape[1]:
+                    # If the input is shorter than expected, fall back to no cache
+                    return model(inputs_embeds=inputs_embeds)
+
+                # Extract embeddings after the prefix
+                inputs_after_prefix = inputs_embeds[:, self.before_embeds.shape[1]:]
+
+                # Expand prefix cache to match batch size
+                expanded_cache = []
+                for layer_cache in self.prefix_cache:
+                    # layer_cache is a tuple of (key_cache, value_cache)
+                    key_cache, value_cache = layer_cache
+                    expanded_key = key_cache.expand(batch_size, -1, -1, -1)
+                    expanded_value = value_cache.expand(batch_size, -1, -1, -1)
+                    expanded_cache.append((expanded_key, expanded_value))
+
+                return model(
+                    inputs_embeds=inputs_after_prefix,
+                    past_key_values=expanded_cache,
+                    use_cache=True
+                )
+            except Exception as e:
+                # If cache application fails, fall back to no cache for this call
+                logger.debug(f"Cache application failed, falling back: {e}")
+                return model(inputs_embeds=inputs_embeds)
+        else:
+            return model(inputs_embeds=inputs_embeds)
+
     def run(self, messages: Union[str, List[dict]], target: str = "") -> GCGResult:
         model = self.model
         tokenizer = self.tokenizer
@@ -265,14 +351,25 @@ class GCGThinking:
         self.before_embeds = before_embeds
         self.after_embeds = after_embeds
 
+        # Setup prefix cache if enabled
+        self._setup_prefix_cache()
+
         # Initialize the attack buffer
-        buffer = self.init_buffer()
+        buffer = self.init_buffer(messages)
         optim_ids = buffer.get_best_ids()
 
         losses = []
         optim_strings = []
 
-        for _ in tqdm(range(config.num_steps)):
+        # Early stopping state tracking
+        consecutive_count = 0
+        best_overall_loss = float('inf')
+        best_overall_ids = None
+        best_overall_step = 0
+        best_overall_prompt = None  # Store the complete prompt with best optimized string
+        max_thinking_length = config.max_generation_tokens - 1
+
+        for step in tqdm(range(config.num_steps)):
             # Compute the token gradient
             optim_ids_onehot_grad = self.compute_token_gradient(optim_ids)
 
@@ -300,7 +397,7 @@ class GCGThinking:
                     after_embeds.repeat(new_search_width, 1, 1),
                 ], dim=1)
 
-                loss = find_executable_batch_size(self._compute_candidates_loss, batch_size)(input_embeds)
+                loss = find_executable_batch_size(lambda bs, ie: self._compute_candidates_loss(bs, ie, config), batch_size)(input_embeds)
                 current_loss = loss.min().item()
                 optim_ids = sampled_ids[loss.argmin()].unsqueeze(0)
 
@@ -313,25 +410,102 @@ class GCGThinking:
             optim_str = tokenizer.batch_decode(optim_ids)[0]
             optim_strings.append(optim_str)
 
-            buffer.log_buffer(tokenizer)
+            # 计算当前最优候选的思考长度
+            current_optim_embeds = torch.cat([before_embeds, embedding_layer(optim_ids), after_embeds], dim=1)
+            with torch.no_grad():
+                current_generated_ids = self._generate_text(current_optim_embeds, max_new_tokens=self.config.max_generation_tokens)
+                current_thinking_length = self._compute_thinking_length_token_level(current_generated_ids)
 
-        min_loss_index = losses.index(min(losses))
+            # Update global best result
+            if current_loss < best_overall_loss:
+                best_overall_loss = current_loss
+                best_overall_ids = optim_ids.clone().to(model.device)  # Ensure on correct device
+                best_overall_step = step
+                # Save the complete prompt with optimized string
+                best_optim_str = tokenizer.batch_decode(optim_ids)[0]
+                best_overall_prompt = before_str + best_optim_str + after_str
+
+            # Early stopping logic
+            if config.early_stop:
+                if current_thinking_length >= max_thinking_length:
+                    consecutive_count += 1
+                else:
+                    consecutive_count = 0
+
+                if consecutive_count >= config.consecutive_threshold:
+                    logger.info(f"Early stopping at step {step+1}: {consecutive_count} consecutive times reached max length {max_thinking_length}")
+                    logger.info(f"Best loss: {best_overall_loss:.4f} at step {best_overall_step+1}")
+
+                    # Save the complete prompt to a file
+                    if best_overall_prompt:
+                        prompt_filename = f"best_prompt_step_{best_overall_step+1}_loss_{best_overall_loss:.4f}.txt"
+                        with open(prompt_filename, 'w', encoding='utf-8') as f:
+                            f.write("=== BEST OPTIMIZED PROMPT ===\n\n")
+                            f.write(f"Step: {best_overall_step+1}\n")
+                            f.write(f"Loss: {best_overall_loss:.4f}\n")
+                            f.write(f"Optimized String: {tokenizer.batch_decode(best_overall_ids)[0]}\n")
+                            f.write(f"Thinking Length: {max_thinking_length}\n\n")
+                            f.write("--- Complete Prompt ---\n")
+                            f.write(best_overall_prompt)
+                        logger.info(f"Best prompt saved to: {prompt_filename}")
+
+                    break
+
+            # Output with consecutive count info
+            consecutive_info = f"Consecutive: {consecutive_count}/{config.consecutive_threshold}" if config.early_stop else ""
+            logger.info(f"Step {step+1}/{config.num_steps} | Thinking Length: {current_thinking_length}/{max_thinking_length} | {consecutive_info} | Best Loss: {buffer.get_lowest_loss():.4f}")
+
+        # Use best result (either from early stopping or normal process)
+        if config.early_stop and best_overall_ids is not None:
+            final_best_loss = best_overall_loss
+            final_best_string = tokenizer.batch_decode(best_overall_ids)[0]
+        else:
+            min_loss_index = losses.index(min(losses))
+            final_best_loss = losses[min_loss_index]
+            final_best_string = optim_strings[min_loss_index]
+
+        # 计算最终最佳结果的思考长度
+        final_best_ids = tokenizer(final_best_string, add_special_tokens=False, return_tensors="pt")["input_ids"].to(model.device)
+        final_best_embeds = torch.cat([before_embeds, embedding_layer(final_best_ids), after_embeds], dim=1)
+        with torch.no_grad():
+            final_generated_ids = self._generate_text(final_best_embeds, max_new_tokens=self.config.max_generation_tokens)
+            final_thinking_length = self._compute_thinking_length_token_level(final_generated_ids)
+
+        # 显示最终结果
+        logger.info(f"Final Result | Thinking Length: {final_thinking_length} | Best Loss: {final_best_loss:.4f}")
 
         result = GCGResult(
-            best_loss=losses[min_loss_index],
-            best_string=optim_strings[min_loss_index],
+            best_loss=final_best_loss,
+            best_string=final_best_string,
             losses=losses,
             strings=optim_strings,
         )
 
         return result
 
-    def init_buffer(self) -> AttackBuffer:
+    def init_buffer(self, messages: Union[str, List[dict]]) -> AttackBuffer:
         model = self.model
         tokenizer = self.tokenizer
         config = self.config
 
-        logger.info(f"Initializing attack buffer of size {config.buffer_size}...")
+        if isinstance(messages, str):
+            messages = [{"role": "user", "content": messages}]
+        else:
+            messages = copy.deepcopy(messages)
+
+        # Append the GCG string at the end of the prompt if location not specified
+        if not any(["{optim_str}" in d["content"] for d in messages]):
+            messages[-1]["content"] = messages[-1]["content"] + "{optim_str}"
+
+        template = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        if tokenizer.bos_token and template.startswith(tokenizer.bos_token):
+            template = template.replace(tokenizer.bos_token, "")
+        before_str, after_str = template.split("{optim_str}")
+
+        # Tokenize everything
+        before_ids = tokenizer([before_str], padding=False, return_tensors="pt")["input_ids"].to(model.device, torch.int64)
+        after_ids = tokenizer([after_str], add_special_tokens=False, return_tensors="pt")["input_ids"].to(model.device, torch.int64)
+
         buffer = AttackBuffer(config.buffer_size)
 
         if isinstance(config.optim_str_init, str):
@@ -352,13 +526,24 @@ class GCGThinking:
             self.after_embeds.repeat(true_buffer_size, 1, 1),
         ], dim=1)
 
-        init_buffer_losses = find_executable_batch_size(self._compute_candidates_loss, true_buffer_size)(init_buffer_embeds)
+        init_buffer_losses = find_executable_batch_size(lambda bs, ie: self._compute_candidates_loss(bs, ie, config), true_buffer_size)(init_buffer_embeds)
 
         for i in range(true_buffer_size):
             buffer.add(init_buffer_losses[i], init_buffer_ids[[i]])
 
-        buffer.log_buffer(tokenizer)
-        logger.info("Initialized attack buffer.")
+        # 重新构建嵌入向量用于初始评估
+        init_before_embeds, init_after_embeds = [self.embedding_layer(ids) for ids in (before_ids, after_ids)]
+
+        # 显示初始化信息
+        best_init_loss = buffer.get_lowest_loss()
+        best_init_ids = buffer.get_best_ids()
+        best_init_embeds = torch.cat([init_before_embeds, self.embedding_layer(best_init_ids), init_after_embeds], dim=1)
+        with torch.no_grad():
+            best_init_generated_ids = self._generate_text(best_init_embeds, max_new_tokens=self.config.max_generation_tokens)
+            best_init_thinking_length = self._compute_thinking_length_token_level(best_init_generated_ids)
+
+        logger.info(f"Initialization | Thinking Length: {best_init_thinking_length} | Best Loss: {best_init_loss:.4f}")
+
         return buffer
 
     def compute_token_gradient(self, optim_ids: Tensor) -> Tensor:
@@ -382,14 +567,14 @@ class GCGThinking:
             generated_ids = self._generate_text(input_embeds, max_new_tokens=self.config.max_generation_tokens)
             # 直接在token层面计算思考长度，避免解码-编码开销
             thinking_length = self._compute_thinking_length_token_level(generated_ids)
-            # Loss is negative thinking length (more tokens = lower loss)
-            loss = -thinking_length
+            # Use log transform for loss (range (0, 1], longer thinking = lower loss)
+            loss = log_loss_transform(thinking_length, self.config.loss_scale_factor)
 
         # Create a simple differentiable proxy loss
         # Use the sum of logits as a proxy (this will give gradients)
         proxy_loss = input_embeds.sum() * 0.001  # Small multiplier to keep gradients reasonable
 
-        # Add the real thinking length as a constant (doesn't affect gradients but affects the displayed loss)
+        # Add the real thinking length loss as a constant (doesn't affect gradients but affects the displayed loss)
         thinking_loss = proxy_loss + loss
 
         optim_ids_onehot_grad = torch.autograd.grad(outputs=[thinking_loss], inputs=[optim_ids_onehot])[0]
@@ -405,7 +590,7 @@ class GCGThinking:
 
         for _ in range(max_new_tokens):
             with torch.no_grad():
-                outputs = self.model(inputs_embeds=current_embeds)
+                outputs = self._apply_prefix_cache(self.model, current_embeds, batch_size=1)
                 logits = outputs.logits[:, -1, :]  # [batch_size, vocab_size]
 
                 # Sample next token
@@ -421,55 +606,144 @@ class GCGThinking:
 
         return generated_ids
 
-    def _compute_candidates_loss(self, search_batch_size: int, input_embeds: Tensor) -> Tensor:
-        """优化的候选者损失计算，直接在token层面计算思考内容长度，避免解码-编码开销"""
-        total_candidates = input_embeds.shape[0]
-        logger.info(f"Evaluating {total_candidates} candidates...")
+    def _generate_text_batch(self, input_embeds: Tensor, max_new_tokens: int = None) -> List[List[int]]:
+        """批量生成文本，支持多个候选同时处理.
+
+        Args:
+            input_embeds: [batch_size, seq_len, embed_dim] 批量输入嵌入
+            max_new_tokens: 最大生成token数
+
+        Returns:
+            List of generated token sequences for each batch item
+        """
+        if max_new_tokens is None:
+            max_new_tokens = self.config.max_generation_tokens
+
+        batch_size = input_embeds.shape[0]
+        generated_sequences = [[] for _ in range(batch_size)]
+        finished_flags = torch.zeros(batch_size, dtype=torch.bool, device=input_embeds.device)
+        current_embeds = input_embeds.clone()
+
+        for step in range(max_new_tokens):
+            if finished_flags.all():
+                break
+
+            with torch.no_grad():
+                outputs = self._apply_prefix_cache(self.model, current_embeds, batch_size=batch_size)
+                logits = outputs.logits[:, -1, :]  # [batch_size, vocab_size]
+
+                # Sample next tokens for all active sequences
+                probs = torch.softmax(logits, dim=-1)
+                next_tokens = torch.multinomial(probs, 1).squeeze(-1)  # [batch_size]
+
+                # Update generated sequences
+                for i in range(batch_size):
+                    if not finished_flags[i]:
+                        token_id = next_tokens[i].item()
+                        generated_sequences[i].append(token_id)
+
+                        # Check for EOS token
+                        if token_id == self.tokenizer.eos_token_id:
+                            finished_flags[i] = True
+
+                # Prepare next step embeddings only for unfinished sequences
+                if not finished_flags.all():
+                    next_token_embeds = self.embedding_layer(next_tokens.unsqueeze(-1))  # [batch_size, 1, embed_dim]
+                    current_embeds = torch.cat([current_embeds, next_token_embeds], dim=1)
+
+        return generated_sequences
+
+    def _compute_candidates_loss(self, search_batch_size: int, input_embeds: Tensor, config: GCGConfig = None) -> Tensor:
+        """优化的候选者损失计算，使用批量处理大幅提升性能"""
+        if config is None:
+            config = self.config
 
         all_loss = []
 
-        for i in range(0, input_embeds.shape[0], search_batch_size):
-            input_embeds_batch = input_embeds[i:i + search_batch_size]
-            current_batch_size = input_embeds_batch.shape[0]
+        # 根据配置决定使用批量生成还是逐个生成
+        if config.use_batch_generation:
+            # 计算有效的批量大小，避免OOM
+            effective_batch_size = min(search_batch_size, config.max_batch_size)
 
-            batch_thinking_losses = []
+            for i in range(0, input_embeds.shape[0], effective_batch_size):
+                input_embeds_batch = input_embeds[i:i + effective_batch_size]
+                current_batch_size = input_embeds_batch.shape[0]
 
-            for j in range(current_batch_size):
-                # Add progress indicator
-                if (i + j) % 10 == 0:
-                    logger.info(f"Processing candidate {i + j}/{total_candidates}")
+                try:
+                    # 使用批量文本生成，一次性处理整个batch
+                    with torch.no_grad():
+                        # 批量生成所有候选的文本
+                        batch_generated_sequences = self._generate_text_batch(
+                            input_embeds_batch,
+                            max_new_tokens=self.config.max_generation_tokens
+                        )
 
-                candidate_embeds = input_embeds_batch[j:j+1]
+                        # 批量计算思考长度和损失
+                        batch_thinking_losses = []
+                        for generated_ids in batch_generated_sequences:
+                            thinking_length = self._compute_thinking_length_token_level(generated_ids)
+                            thinking_loss = log_loss_transform(thinking_length, config.loss_scale_factor)
+                            batch_thinking_losses.append(thinking_loss)
 
-                # Generate text and extract thinking content
-                with torch.no_grad():
-                    try:
-                        # 直接获取token ids，不进行字符串解码
-                        generated_ids = self._generate_text(candidate_embeds, max_new_tokens=self.config.max_generation_tokens)
+                        loss = torch.tensor(batch_thinking_losses, dtype=torch.float32, device=input_embeds.device)
+                        all_loss.append(loss)
 
-                        # 直接在token层面计算思考长度
-                        thinking_length = self._compute_thinking_length_token_level(generated_ids)
-                        thinking_loss = -thinking_length
+                except RuntimeError as e:
+                    if "out of memory" in str(e):
+                        logger.warning(f"OOM in batch generation with size {current_batch_size}, reducing batch size")
+                        torch.cuda.empty_cache()  # 清理缓存
+                        # 使用更小的批量大小重试
+                        smaller_batch_size = max(1, current_batch_size // 2)
+                        for j in range(0, current_batch_size, smaller_batch_size):
+                            sub_batch = input_embeds_batch[j:j + smaller_batch_size]
+                            try:
+                                sub_generated_sequences = self._generate_text_batch(
+                                    sub_batch, max_new_tokens=self.config.max_generation_tokens
+                                )
+                                sub_losses = []
+                                for gen_ids in sub_generated_sequences:
+                                    thinking_length = self._compute_thinking_length_token_level(gen_ids)
+                                    sub_loss = log_loss_transform(thinking_length, config.loss_scale_factor)
+                                    sub_losses.append(sub_loss)
+                                loss = torch.tensor(sub_losses, dtype=torch.float32, device=input_embeds.device)
+                                all_loss.append(loss)
+                            except Exception:
+                                # 最终降级到逐个处理
+                                for k in range(sub_batch.shape[0]):
+                                    individual_loss = self._compute_single_candidate_loss(
+                                        sub_batch[k:k+1], config
+                                    )
+                                    all_loss.append(individual_loss)
+                    else:
+                        raise e
+        else:
+            # 使用原始的逐个处理方式
+            for i in range(0, input_embeds.shape[0], search_batch_size):
+                input_embeds_batch = input_embeds[i:i + search_batch_size]
+                current_batch_size = input_embeds_batch.shape[0]
 
-                        # 偶尔解码一次用于日志显示（减少不必要的解码操作）
-                        if (i + j) % 20 == 0 and thinking_length > 0:
-                            generated_text = self.tokenizer.decode(generated_ids, skip_special_tokens=True)
-                            thinking_content = extract_thinking_content(generated_text,
-                                                                       self.config.thinking_start_tag,
-                                                                       self.config.thinking_end_tag)
-                            logger.info(f"Candidate {i+j}: thinking_length={thinking_length}, content_preview={thinking_content[:50]}...")
+                batch_thinking_losses = []
+                for j in range(current_batch_size):
+                    individual_loss = self._compute_single_candidate_loss(
+                        input_embeds_batch[j:j+1], config
+                    )
+                    batch_thinking_losses.append(individual_loss)
 
-                    except Exception as e:
-                        logger.error(f"Error processing candidate {i+j}: {e}")
-                        thinking_loss = 0.0  # Default loss if error occurs
+                loss = torch.tensor(batch_thinking_losses, dtype=torch.float32, device=input_embeds.device)
+                all_loss.append(loss)
 
-                batch_thinking_losses.append(thinking_loss)
-
-            loss = torch.tensor(batch_thinking_losses, dtype=torch.float32, device=input_embeds.device)
-            all_loss.append(loss)
-
-        logger.info(f"Completed evaluating {total_candidates} candidates")
         return torch.cat(all_loss, dim=0)
+
+    def _compute_single_candidate_loss(self, candidate_embeds: Tensor, config: GCGConfig) -> Tensor:
+        """计算单个候选的损失，用于降级处理"""
+        with torch.no_grad():
+            try:
+                generated_ids = self._generate_text(candidate_embeds, max_new_tokens=self.config.max_generation_tokens)
+                thinking_length = self._compute_thinking_length_token_level(generated_ids)
+                thinking_loss = log_loss_transform(thinking_length, config.loss_scale_factor)
+                return torch.tensor(thinking_loss, dtype=torch.float32, device=candidate_embeds.device)
+            except Exception:
+                return torch.tensor(0.0, dtype=torch.float32, device=candidate_embeds.device)
 
 
 def run_gcg_thinking(

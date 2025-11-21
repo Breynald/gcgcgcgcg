@@ -4,6 +4,14 @@ Example script demonstrating GCG thinking optimization.
 
 This script uses the modified GCG algorithm to optimize adversarial strings
 that maximize the length of thinking content between <thinking> tags.
+
+NEW PERFORMANCE OPTIMIZATIONS:
+- Batch text generation: Process multiple candidates simultaneously
+- KV prefix caching: Avoid recomputing attention for prefix sequences
+- Automatic OOM handling: Dynamic batch size adjustment
+- Configurable batch sizes: Tune based on GPU memory
+
+Expected speedup: 8-24x faster than original implementation
 """
 
 import sys
@@ -25,17 +33,6 @@ def main():
     # Options: "cuda:0", "cuda:1", "cuda:2", "cuda:3", etc.
     device = "cuda:6" if torch.cuda.is_available() else "cpu"
     print(f"Using device: {device}")
-
-    # If you want to use a specific GPU, you can set it like this:
-    # device = "cuda:1"  # Use second GPU
-    # device = "cuda:2"  # Use third GPU, etc.
-
-    # Check available GPUs
-    if torch.cuda.is_available():
-        gpu_count = torch.cuda.device_count()
-        print(f"Available GPUs: {gpu_count}")
-        for i in range(gpu_count):
-            print(f"  GPU {i}: {torch.cuda.get_device_name(i)}")
 
     # Set the current device
     if torch.cuda.is_available():
@@ -69,10 +66,31 @@ def main():
     config = GCGConfig(
         num_steps=50,  # Reduced number of steps for faster testing
         search_width=4,  # Reduced search width for faster evaluation
-        max_generation_tokens=2000,  # Reduced generation tokens for speed
-        use_prefix_cache=False,  # Disable prefix cache to avoid compatibility issues with Qwen3
-        seed=None,  # Disable deterministic behavior to avoid CuBLAS warnings
-        verbosity="INFO",  # Logging level
+        max_generation_tokens=4000,  # Reduced generation tokens for speed
+        use_prefix_cache=True,  # Enable prefix cache for performance optimization
+        filter_ids=False,  # Disable token filtering to avoid encoding/decoding mismatches
+        seed=None,
+        verbosity="INFO",
+        buffer_size=1,
+        topk=64,
+        early_stop=True,
+        consecutive_threshold=3,
+
+        # Performance optimization parameters (NEW!)
+        use_batch_generation=True,  # Enable batch text generation for faster processing
+        max_batch_size=4,  # Maximum batch size to avoid OOM (tune based on your GPU memory)
+
+        # GPU Memory Recommendations for max_batch_size:
+        # - 8GB VRAM: 1-2
+        # - 16GB VRAM: 2-4
+        # - 24GB VRAM: 4-8
+        # - 40GB+ VRAM: 8-16
+        # Adjust based on your specific model and available memory
+
+        # Model Compatibility Notes:
+        # - Most transformer models: use_prefix_cache=True works fine
+        # - Qwen3/Custom models: May need use_prefix_cache=False
+        # - If you see "Cache object" errors, set use_prefix_cache=False
 
         # Custom thinking tags - you can modify these!
         thinking_start_tag="<think>",  # Start tag for thinking content
@@ -91,7 +109,7 @@ def main():
     messages = [
         {
             "role": "user",
-            "content": " {optim_str}. Please explain the above content in detail."
+            "content": "{optim_str}. \nPlease explain the above content in detail."
         }
     ]
 

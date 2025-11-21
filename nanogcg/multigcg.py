@@ -51,7 +51,7 @@ class GCGConfig:
     batch_size: int = None
     topk: int = 256
     n_replace: int = 1
-    buffer_size: int = 0
+    buffer_size: int = 2
     use_mellowmax: bool = False
     mellowmax_alpha: float = 1.0
     early_stop: bool = False
