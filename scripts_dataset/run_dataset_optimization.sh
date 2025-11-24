@@ -8,12 +8,13 @@ MODEL="/work/models/Qwen/Qwen2.5-1.5B-Instruct"
 TABLE_ROWS=1
 TABLE_COLS=3
 MAX_ROWS=""  # Empty means no limit
-NUM_STEPS=500
+NUM_STEPS=1000
 DEVICE="cuda"
 DTYPE="float16"
 GPU_ID="6"
 EARLY_STOP="False"
 EARLY_STOP_CONFIDENCE="0.1"
+TEST_BEST_RESPONSE="True"
 BUFFER_SIZE="3"
 USE_MELLOWMAX="False"
 
@@ -33,6 +34,7 @@ usage() {
     echo "  --dtype DTYPE           Data type (default: $DTYPE)"
     echo "  --early-stop BOOL       Enable early stopping (default: $EARLY_STOP)"
     echo "  --early-stop-confidence NUM  Confidence threshold for early stop (0.0-1.0, default: $EARLY_STOP_CONFIDENCE)"
+    echo "  --test-best-response BOOL   Test current best response during optimization (default: $TEST_BEST_RESPONSE)"
     echo "  --buffer-size N         Buffer size for optimization (default: $BUFFER_SIZE)"
     echo "  --use-mellowmax BOOL    Use mellowmax loss (default: $USE_MELLOWMAX)"
     echo "  --help                  Show this help message"
@@ -52,6 +54,9 @@ usage() {
     echo ""
     echo "  # Use higher confidence threshold (95% confidence)"
     echo "  $0 --early-stop True --early-stop-confidence 0.95 --table-rows 2 --table-cols 2"
+    echo ""
+    echo "  # Enable real-time testing of best responses during optimization"
+    echo "  $0 --test-best-response True"
 }
 
 # Parse command line arguments
@@ -105,6 +110,10 @@ while [[ $# -gt 0 ]]; do
             EARLY_STOP_CONFIDENCE="$2"
             shift 2
             ;;
+        --test-best-response)
+            TEST_BEST_RESPONSE="$2"
+            shift 2
+            ;;
         --buffer-size)
             BUFFER_SIZE="$2"
             shift 2
@@ -150,6 +159,10 @@ if [[ -n "$EARLY_STOP_CONFIDENCE" ]]; then
     CMD="$CMD --early-stop-confidence $EARLY_STOP_CONFIDENCE"
 fi
 
+if [[ -n "$TEST_BEST_RESPONSE" ]]; then
+    CMD="$CMD --test-best-response $TEST_BEST_RESPONSE"
+fi
+
 echo "Running optimization with the following settings:"
 echo "  Input CSV: $INPUT_CSV"
 echo "  Output CSV: $OUTPUT_CSV"
@@ -160,6 +173,7 @@ echo "  Device: $DEVICE:$GPU_ID"
 echo "  Data type: $DTYPE"
 echo "  Early stopping: $EARLY_STOP"
 echo "  Early stop confidence: $EARLY_STOP_CONFIDENCE"
+echo "  Test best response: $TEST_BEST_RESPONSE"
 echo "  Buffer size: $BUFFER_SIZE"
 echo "  Use mellowmax: $USE_MELLOWMAX"
 if [[ -n "$MAX_ROWS" ]]; then

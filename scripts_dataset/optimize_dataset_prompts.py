@@ -64,7 +64,7 @@ def generate_question_table_prompt(table_rows: int, table_cols: int, question: s
         col_headers.append(f"Metric {chr(65 + i)}")  # A, B, C, D...
 
     # Start building the table (same as batch_optimization)
-    lines = ["Here is a table:\n"]
+    lines = []
 
     # Header row
     header_row = "| | " + " | ".join(col_headers) + " |"
@@ -203,7 +203,7 @@ def save_optimized_results(
         for i in range(table_cols):
             col_headers.append(f"Metric {chr(65 + i)}")
 
-        lines = ["Here is a table:\n"]
+        lines = []
 
         # Header row
         header_row = "| | " + " | ".join(col_headers) + " |"
@@ -270,6 +270,8 @@ def main():
                        help="Enable early stopping (default: True)")
     parser.add_argument("--early-stop-confidence", type=float, default=None,
                        help="Confidence threshold for early stopping (0.0-1.0, only used if early_stop=True)")
+    parser.add_argument("--test-best-response", type=lambda x: x.lower() == 'true', default=False,
+                       help="Test current best response during optimization (default: False)")
     parser.add_argument("--buffer-size", type=int, default=3,
                        help="Buffer size for optimization (default: 3)")
     parser.add_argument("--use-mellowmax", type=lambda x: x.lower() == 'true', default=False,
@@ -314,6 +316,7 @@ def main():
         use_mellowmax=args.use_mellowmax,
         early_stop=args.early_stop == "True",
         early_stop_confidence=args.early_stop_confidence,
+        test_best_response=args.test_best_response,  # 启用实时测试最佳回答
         use_prefix_cache=False,  # Disable prefix cache to avoid issues
         filter_ids=False  # Disable token filtering to prevent optimization failures
     )

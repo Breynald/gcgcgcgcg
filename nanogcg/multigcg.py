@@ -64,6 +64,7 @@ class GCGConfig:
     seed: int = None
     verbosity: str = "INFO"
     probe_sampling_config: Optional[ProbeSamplingConfig] = None
+    test_best_response: bool = False  # 是否在优化过程中测试最佳回答
 
 
 @dataclass
@@ -323,7 +324,7 @@ class GCG:
         losses = []
         optim_strings_list = []
 
-        for _ in tqdm(range(config.num_steps)):
+        for step in tqdm(range(config.num_steps)):
             optim_ids_onehot_grad_list = self.compute_token_gradient(optim_ids_list)
 
             with torch.no_grad():
@@ -365,6 +366,10 @@ class GCG:
 
             buffer.log_buffer(tokenizer)
 
+            # 实时测试当前最佳回答（如果启用）
+            if self.config.test_best_response and step % 10 == 0:  # 每10步测试一次
+                self._test_current_best_response(step, current_loss, optim_strings, messages, target, optim_str_placeholders)
+
             if self.stop_flag:
                 logger.info("Early stopping due to finding a perfect match.")
                 break
@@ -394,6 +399,52 @@ class GCG:
             else:
                 logger.info(f"Early stopping enabled but not triggered - saving best historical result (loss: {losses[min_loss_index]:.4f})")
         return result
+
+    def _test_current_best_response(self, step: int, current_loss: float, optim_strings: List[str],
+                                   messages: List[dict], target: str, optim_str_placeholders: List[str]):
+        """测试当前最佳优化字符串的实际生成效果"""
+        try:
+            # 构建完整的提示
+            test_messages = copy.deepcopy(messages)
+
+            # 替换占位符为实际的优化字符串
+            for i, placeholder in enumerate(optim_str_placeholders):
+                if i < len(optim_strings):
+                    for msg in test_messages:
+                        msg["content"] = msg["content"].replace(placeholder, optim_strings[i])
+
+            # 应用聊天模板
+            test_prompt = self.tokenizer.apply_chat_template(test_messages, tokenize=False, add_generation_prompt=True)
+
+            # Tokenize并生成回答
+            inputs = self.tokenizer(test_prompt, return_tensors="pt").to(self.model.device)
+
+            with torch.no_grad():
+                outputs = self.model.generate(
+                    **inputs,
+                    max_new_tokens=self.target_ids.shape[1],
+                    do_sample=False,  # 使用贪心解码
+                    pad_token_id=self.tokenizer.eos_token_id
+                )
+
+            # 解码生成结果
+            generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+            input_text = self.tokenizer.decode(inputs['input_ids'][0], skip_special_tokens=True)
+            response = generated_text[len(input_text):].strip()
+
+            # 检查是否匹配目标
+            is_match = response.startswith(target.strip())
+
+            # 输出测试结果
+            logger.info(f"=== Step {step} Real-time Test (Loss: {current_loss:.4f}) ===")
+            logger.info(f"Optimized strings: {optim_strings}")
+            logger.info(f"Generated response: '{response}'")
+            logger.info(f"Target: '{target.strip()}'")
+            logger.info(f"Match: {'✓ SUCCESS' if is_match else '✗ FAILED'}")
+            logger.info("=" * 60)
+
+        except Exception as e:
+            logger.warning(f"Real-time testing failed at step {step}: {e}")
 
     def init_buffer(self) -> AttackBuffer:
         model = self.model
