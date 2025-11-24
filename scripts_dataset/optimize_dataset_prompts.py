@@ -267,6 +267,10 @@ def main():
                        help="Data type for model (float16/float32)")
     parser.add_argument("--early-stop-confidence", type=float, default=None,
                        help="Confidence threshold for early stopping (0.0-1.0, only used if early_stop=True)")
+    parser.add_argument("--buffer-size", type=int, default=3,
+                       help="Buffer size for optimization (default: 3)")
+    parser.add_argument("--use-mellowmax", type=lambda x: x.lower() == 'true', default=False,
+                       help="Use mellowmax loss function (default: False)")
 
     args = parser.parse_args()
 
@@ -303,8 +307,8 @@ def main():
     # Setup GCG configuration
     config = GCGConfig(
         num_steps=args.num_steps,
-        buffer_size=5,
-        use_mellowmax=True,
+        buffer_size=args.buffer_size,
+        use_mellowmax=args.use_mellowmax,
         early_stop=True,
         early_stop_confidence=args.early_stop_confidence,
         use_prefix_cache=False,  # Disable prefix cache to avoid issues

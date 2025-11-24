@@ -109,7 +109,7 @@ def main():
     messages = [
         {
             "role": "user",
-            "content": "{optim_str}. \nPlease explain the above content in detail."
+            "content": "Please explain the following content in detail, thinking step by step: {optim_str}"
         }
     ]
 

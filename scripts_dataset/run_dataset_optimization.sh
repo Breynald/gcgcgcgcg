@@ -2,17 +2,19 @@
 # Shell script to run the dataset optimization
 
 # Default parameters
-INPUT_CSV="/work/table-fp/nanoGCG-main/assets/question.csv"
-OUTPUT_CSV="/work/table-fp/nanoGCG-main/assets/optimized_prompts.csv"
+INPUT_CSV="/work/table-fp/nanoGCG-main/assets/question_selected.csv"
+OUTPUT_CSV="/work/table-fp/nanoGCG-main/assets/optimized_selected_prompts.csv"
 MODEL="/work/models/Qwen/Qwen2.5-1.5B-Instruct"
 TABLE_ROWS=1
 TABLE_COLS=3
 MAX_ROWS=""  # Empty means no limit
-NUM_STEPS=1000
+NUM_STEPS=500
 DEVICE="cuda"
 DTYPE="float16"
-GPU_ID="4"
+GPU_ID="0"
 EARLY_STOP_CONFIDENCE="0.3"
+BUFFER_SIZE="3"
+USE_MELLOWMAX="False"
 
 # Function to display usage
 usage() {
@@ -29,6 +31,8 @@ usage() {
     echo "  --gpu-id ID             GPU ID to use (default: $GPU_ID)"
     echo "  --dtype DTYPE           Data type (default: $DTYPE)"
     echo "  --early-stop-confidence NUM  Confidence threshold for early stop (0.0-1.0)"
+    echo "  --buffer-size N         Buffer size for optimization (default: $BUFFER_SIZE)"
+    echo "  --use-mellowmax BOOL    Use mellowmax loss (default: $USE_MELLOWMAX)"
     echo "  --help                  Show this help message"
     echo ""
     echo "Examples:"
@@ -92,6 +96,14 @@ while [[ $# -gt 0 ]]; do
             EARLY_STOP_CONFIDENCE="$2"
             shift 2
             ;;
+        --buffer-size)
+            BUFFER_SIZE="$2"
+            shift 2
+            ;;
+        --use-mellowmax)
+            USE_MELLOWMAX="$2"
+            shift 2
+            ;;
         --help)
             usage
             exit 0
@@ -114,6 +126,8 @@ CMD="$CMD --table-cols $TABLE_COLS"
 CMD="$CMD --num-steps $NUM_STEPS"
 CMD="$CMD --device '$DEVICE:$GPU_ID'"
 CMD="$CMD --dtype '$DTYPE'"
+CMD="$CMD --buffer-size $BUFFER_SIZE"
+CMD="$CMD --use-mellowmax $USE_MELLOWMAX"
 
 if [[ -n "$MAX_ROWS" ]]; then
     CMD="$CMD --max-rows $MAX_ROWS"
@@ -131,6 +145,8 @@ echo "  Table size: ${TABLE_ROWS}x${TABLE_COLS}"
 echo "  Optimization steps: $NUM_STEPS"
 echo "  Device: $DEVICE:$GPU_ID"
 echo "  Data type: $DTYPE"
+echo "  Buffer size: $BUFFER_SIZE"
+echo "  Use mellowmax: $USE_MELLOWMAX"
 if [[ -n "$MAX_ROWS" ]]; then
     echo "  Max rows: $MAX_ROWS (testing mode)"
 fi
