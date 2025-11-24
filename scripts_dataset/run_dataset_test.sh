@@ -2,9 +2,9 @@
 # Shell script to test optimized prompts
 
 # Default parameters
-INPUT_CSV="/work/table-fp/nanoGCG-main/assets/optimized_prompts.csv"
+INPUT_CSV="/work/table-fp/nanoGCG-main/assets/optimized_selected_prompts_2.csv"
 MODEL="/work/models/Qwen/Qwen2.5-1.5B-Instruct"
-DEVICE="cuda:7"
+DEVICE="cuda:6"
 DTYPE="float16"
 MAX_ROWS=""
 MAX_NEW_TOKENS=""

@@ -265,6 +265,9 @@ def main():
                        help="Device to use (cuda:0, cuda:1, cpu)")
     parser.add_argument("--dtype", default="float16",
                        help="Data type for model (float16/float32)")
+    parser.add_argument("--early-stop", type=str, default="True",
+                       choices=["True", "False"],
+                       help="Enable early stopping (default: True)")
     parser.add_argument("--early-stop-confidence", type=float, default=None,
                        help="Confidence threshold for early stopping (0.0-1.0, only used if early_stop=True)")
     parser.add_argument("--buffer-size", type=int, default=3,
@@ -309,7 +312,7 @@ def main():
         num_steps=args.num_steps,
         buffer_size=args.buffer_size,
         use_mellowmax=args.use_mellowmax,
-        early_stop=True,
+        early_stop=args.early_stop == "True",
         early_stop_confidence=args.early_stop_confidence,
         use_prefix_cache=False,  # Disable prefix cache to avoid issues
         filter_ids=False  # Disable token filtering to prevent optimization failures

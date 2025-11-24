@@ -369,14 +369,30 @@ class GCG:
                 logger.info("Early stopping due to finding a perfect match.")
                 break
 
-        min_loss_index = losses.index(min(losses))
-
-        result = GCGResult(
-            best_loss=losses[min_loss_index],
-            best_strings=optim_strings_list[min_loss_index],
-            losses=losses,
-            strings=optim_strings_list,
-        )
+        # 根据是否触发早停来决定保存哪个结果
+        if self.config.early_stop and self.stop_flag:
+            # 如果启用了早停并且触发了早停，保存最后一次迭代的结果
+            # 这确保保存的是确实满足早停条件的结果
+            result = GCGResult(
+                best_loss=losses[-1],
+                best_strings=optim_strings_list[-1],
+                losses=losses,
+                strings=optim_strings_list,
+            )
+            logger.info(f"Early stopping triggered - saving results from final iteration (loss: {losses[-1]:.4f})")
+        else:
+            # 正常情况下保存历史最佳loss的结果
+            min_loss_index = losses.index(min(losses))
+            result = GCGResult(
+                best_loss=losses[min_loss_index],
+                best_strings=optim_strings_list[min_loss_index],
+                losses=losses,
+                strings=optim_strings_list,
+            )
+            if not self.config.early_stop:
+                logger.info(f"Normal optimization completed - saving best historical result (loss: {losses[min_loss_index]:.4f})")
+            else:
+                logger.info(f"Early stopping enabled but not triggered - saving best historical result (loss: {losses[min_loss_index]:.4f})")
         return result
 
     def init_buffer(self) -> AttackBuffer:

@@ -3,7 +3,7 @@
 
 # Default parameters
 INPUT_CSV="/work/table-fp/nanoGCG-main/assets/question_selected.csv"
-OUTPUT_CSV="/work/table-fp/nanoGCG-main/assets/optimized_selected_prompts.csv"
+OUTPUT_CSV="/work/table-fp/nanoGCG-main/assets/optimized_selected_prompts_3.csv"
 MODEL="/work/models/Qwen/Qwen2.5-1.5B-Instruct"
 TABLE_ROWS=1
 TABLE_COLS=3
@@ -11,8 +11,9 @@ MAX_ROWS=""  # Empty means no limit
 NUM_STEPS=500
 DEVICE="cuda"
 DTYPE="float16"
-GPU_ID="0"
-EARLY_STOP_CONFIDENCE="0.3"
+GPU_ID="6"
+EARLY_STOP="False"
+EARLY_STOP_CONFIDENCE="0.1"
 BUFFER_SIZE="3"
 USE_MELLOWMAX="False"
 
@@ -30,7 +31,8 @@ usage() {
     echo "  --device DEVICE         Device to use (default: $DEVICE)"
     echo "  --gpu-id ID             GPU ID to use (default: $GPU_ID)"
     echo "  --dtype DTYPE           Data type (default: $DTYPE)"
-    echo "  --early-stop-confidence NUM  Confidence threshold for early stop (0.0-1.0)"
+    echo "  --early-stop BOOL       Enable early stopping (default: $EARLY_STOP)"
+    echo "  --early-stop-confidence NUM  Confidence threshold for early stop (0.0-1.0, default: $EARLY_STOP_CONFIDENCE)"
     echo "  --buffer-size N         Buffer size for optimization (default: $BUFFER_SIZE)"
     echo "  --use-mellowmax BOOL    Use mellowmax loss (default: $USE_MELLOWMAX)"
     echo "  --help                  Show this help message"
@@ -42,11 +44,14 @@ usage() {
     echo "  # Test with only 5 questions and 1x1 table"
     echo "  $0 --max-rows 5 --table-rows 1 --table-cols 1"
     echo ""
+    echo "  # Disable early stopping for full optimization"
+    echo "  $0 --early-stop False"
+    echo ""
     echo "  # Use confidence threshold for early stop (90% confidence)"
-    echo "  $0 --early-stop-confidence 0.9"
+    echo "  $0 --early-stop True --early-stop-confidence 0.9"
     echo ""
     echo "  # Use higher confidence threshold (95% confidence)"
-    echo "  $0 --early-stop-confidence 0.95 --table-rows 2 --table-cols 2"
+    echo "  $0 --early-stop True --early-stop-confidence 0.95 --table-rows 2 --table-cols 2"
 }
 
 # Parse command line arguments
@@ -92,6 +97,10 @@ while [[ $# -gt 0 ]]; do
             DTYPE="$2"
             shift 2
             ;;
+        --early-stop)
+            EARLY_STOP="$2"
+            shift 2
+            ;;
         --early-stop-confidence)
             EARLY_STOP_CONFIDENCE="$2"
             shift 2
@@ -133,6 +142,10 @@ if [[ -n "$MAX_ROWS" ]]; then
     CMD="$CMD --max-rows $MAX_ROWS"
 fi
 
+if [[ -n "$EARLY_STOP" ]]; then
+    CMD="$CMD --early-stop $EARLY_STOP"
+fi
+
 if [[ -n "$EARLY_STOP_CONFIDENCE" ]]; then
     CMD="$CMD --early-stop-confidence $EARLY_STOP_CONFIDENCE"
 fi
@@ -145,15 +158,12 @@ echo "  Table size: ${TABLE_ROWS}x${TABLE_COLS}"
 echo "  Optimization steps: $NUM_STEPS"
 echo "  Device: $DEVICE:$GPU_ID"
 echo "  Data type: $DTYPE"
+echo "  Early stopping: $EARLY_STOP"
+echo "  Early stop confidence: $EARLY_STOP_CONFIDENCE"
 echo "  Buffer size: $BUFFER_SIZE"
 echo "  Use mellowmax: $USE_MELLOWMAX"
 if [[ -n "$MAX_ROWS" ]]; then
     echo "  Max rows: $MAX_ROWS (testing mode)"
-fi
-if [[ -n "$EARLY_STOP_CONFIDENCE" ]]; then
-    echo "  Early stop confidence: $EARLY_STOP_CONFIDENCE"
-else
-    echo "  Early stop confidence: disabled (greedy match only)"
 fi
 echo ""
 
