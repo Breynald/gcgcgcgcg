@@ -2,7 +2,7 @@
 # Shell script to test optimized prompts
 
 # Default parameters
-INPUT_CSV="../assets/optimized_selected_prompts_3.csv"
+INPUT_CSV="../assets/optimized_prompts.csv"
 MODEL="/work/models/Qwen/Qwen2.5-1.5B-Instruct"
 DEVICE="cuda:6"
 DTYPE="float16"

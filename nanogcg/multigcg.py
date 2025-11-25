@@ -55,7 +55,8 @@ class GCGConfig:
     use_mellowmax: bool = False
     mellowmax_alpha: float = 1.0
     early_stop: bool = False
-    early_stop_confidence: float = None  # Confidence threshold for early stop (0.0-1.0)
+    early_stop_confidence: float = None  # Initial confidence threshold for early stop (0.0-1.0)
+    dynamic_confidence: bool = False  # Whether to use dynamic confidence that decreases over steps
     use_prefix_cache: bool = True
     allow_non_ascii: bool = False
     forbidden_ids: Tensor = None
@@ -339,21 +340,21 @@ class GCG:
 
                 if config.filter_ids:
                     sampled_ids_list = filter_ids_multi(sampled_ids_list, tokenizer)
-                
+
                 new_search_width = sampled_ids_list[0].shape[0]
 
                 input_embeds = self._create_input_embeds_batch(new_search_width, sampled_ids_list, self.fixed_embeds, self.target_embeds)
-                
+
                 batch_size = new_search_width if config.batch_size is None else config.batch_size
-                
+
                 if self.config.probe_sampling_config is None:
-                    loss = find_executable_batch_size(self._compute_candidates_loss_original, batch_size)(input_embeds)
+                    loss = find_executable_batch_size(self._compute_candidates_loss_original, batch_size)(input_embeds, step)
                     current_loss = loss.min().item()
                     best_candidate_idx = loss.argmin()
                     optim_ids_list = [ids[best_candidate_idx].unsqueeze(0) for ids in sampled_ids_list]
                 else:
                     current_loss, optim_ids_list = find_executable_batch_size(self._compute_candidates_loss_probe_sampling, batch_size)(
-                        input_embeds, sampled_ids_list
+                        input_embeds, sampled_ids_list, step
                     )
 
                 losses.append(current_loss)
@@ -559,6 +560,7 @@ class GCG:
         self,
         search_batch_size: int,
         input_embeds: Tensor,
+        step: int = 0,
     ) -> Tensor:
         all_loss = []
         prefix_cache_batch = None
@@ -621,10 +623,24 @@ class GCG:
                             avg_confidence = torch.mean(target_probs, dim=-1)
                             max_confidence = torch.max(avg_confidence).item()
 
+                            # 计算动态置信度阈值
+                            if self.config.dynamic_confidence:
+                                # 线性递减：从初始置信度递减到接近0
+                                progress_ratio = step / max(1, self.config.num_steps - 1)  # 避免除0
+                                dynamic_threshold = self.config.early_stop_confidence * (1 - progress_ratio)
+                                dynamic_threshold = max(0.001, dynamic_threshold)  # 设置最小阈值，避免完全为0
+
+                                if self.config.verbosity != "WARNING":
+                                    print(f"Step {step}/{self.config.num_steps}: Dynamic confidence threshold = {dynamic_threshold:.3f} (initial: {self.config.early_stop_confidence:.3f}, current confidence: {max_confidence:.3f})")
+
+                                confidence_threshold = dynamic_threshold
+                            else:
+                                confidence_threshold = self.config.early_stop_confidence
+
                             # 检查是否满足置信度阈值
-                            if max_confidence >= self.config.early_stop_confidence:
+                            if max_confidence >= confidence_threshold:
                                 if self.config.verbosity != "WARNING":  # 避免在batch模式下输出过多信息
-                                    print(f"Early stopping: greedy match achieved with confidence {max_confidence:.3f} >= {self.config.early_stop_confidence}")
+                                    print(f"Early stopping: greedy match achieved with confidence {max_confidence:.3f} >= {confidence_threshold:.3f}")
                                 self.stop_flag = True
                         else:
                             # 没有设置置信度阈值，直接早停
@@ -652,6 +668,7 @@ class GCG:
         search_batch_size: int,
         input_embeds: Tensor,
         sampled_ids_list: List[Tensor],
+        step: int = 0,
     ) -> Tuple[float, List[Tensor]]:
         probe_sampling_config = self.config.probe_sampling_config
         assert probe_sampling_config, "Probe sampling config wasn't set up properly."
@@ -661,8 +678,8 @@ class GCG:
         probe_idxs = torch.randperm(B)[:probe_size].to(input_embeds.device)
         probe_embeds = input_embeds[probe_idxs]
         
-        def _compute_probe_losses(result_queue: queue.Queue, search_batch_size: int, probe_embeds: Tensor) -> None:
-            probe_losses = self._compute_candidates_loss_original(search_batch_size, probe_embeds)
+        def _compute_probe_losses(result_queue: queue.Queue, search_batch_size: int, probe_embeds: Tensor, step: int) -> None:
+            probe_losses = self._compute_candidates_loss_original(search_batch_size, probe_embeds, step)
             result_queue.put(("probe", probe_losses))
 
         def _compute_draft_losses(
@@ -746,7 +763,7 @@ class GCG:
         )
         probe_thread = threading.Thread(
             target=_compute_probe_losses,
-            args=(result_queue, search_batch_size, probe_embeds),
+            args=(result_queue, search_batch_size, probe_embeds, step),
         )
 
         draft_thread.start()

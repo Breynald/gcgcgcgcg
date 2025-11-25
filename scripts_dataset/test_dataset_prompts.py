@@ -59,9 +59,16 @@ def test_single_prompt(model, tokenizer, prompt: str, target: str, max_new_token
         # Use provided max_new_tokens or calculated target tokens, whichever is larger
         final_max_tokens = max(max_new_tokens or 0, target_tokens)
 
-        
+        # Apply chat template (consistent with multigcg.py)
+        messages = [{"role": "user", "content": prompt}]
+        final_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+
+        # Handle BOS token (consistent with multigcg.py:281-282)
+        if tokenizer.bos_token and final_prompt.startswith(tokenizer.bos_token):
+            final_prompt = final_prompt.replace(tokenizer.bos_token, "")
+
         # Tokenize input
-        inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+        inputs = tokenizer(final_prompt, return_tensors="pt").to(model.device)
 
         # Generate response
         with torch.no_grad():
