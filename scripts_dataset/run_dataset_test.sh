@@ -3,7 +3,10 @@
 
 # Default parameters
 INPUT_CSV="../assets/optimized_prompts.csv"
+# MODEL="/work/models/Qwen/Qwen2.5-7B-Instruct"
+# MODEL="/work/models/meta-llama/Llama-3.1-8B-Instruct"
 MODEL="/work/models/Qwen/Qwen2.5-1.5B-Instruct"
+# MODEL="/work/models/lora/sft/alpaca"
 DEVICE="cuda:6"
 DTYPE="float16"
 MAX_ROWS=""
