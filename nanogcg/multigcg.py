@@ -57,6 +57,7 @@ class GCGConfig:
     early_stop: bool = False
     early_stop_confidence: float = None  # Initial confidence threshold for early stop (0.0-1.0)
     dynamic_confidence: bool = False  # Whether to use dynamic confidence that decreases over steps
+    early_stop_loss_threshold: float = None  # Loss threshold for early stop (optional additional constraint)
     use_prefix_cache: bool = True
     allow_non_ascii: bool = False
     forbidden_ids: Tensor = None
@@ -613,38 +614,57 @@ class GCG:
                     greedy_match = torch.any(torch.all(torch.argmax(shift_logits, dim=-1) == shift_labels, dim=-1)).item()
 
                     if greedy_match:
-                        # 如果贪心匹配成功，检查置信度阈值（如果设置了）
-                        if self.config.early_stop_confidence is not None:
-                            # 计算目标token的置信度
-                            label_logits = torch.gather(shift_logits, -1, shift_labels.unsqueeze(-1)).squeeze(-1)
-                            target_probs = torch.softmax(label_logits, dim=-1)
+                        # 获取当前批次的loss值
+                        current_batch_loss = loss.min().item()
 
-                            # 使用平均概率作为置信度指标
-                            avg_confidence = torch.mean(target_probs, dim=-1)
-                            max_confidence = torch.max(avg_confidence).item()
+                        # 检查loss阈值（如果设置了）
+                        loss_check_passed = True
+                        if self.config.early_stop_loss_threshold is not None:
+                            loss_check_passed = current_batch_loss <= self.config.early_stop_loss_threshold
+                            if self.config.verbosity != "WARNING" and not loss_check_passed:
+                                print(f"Early stopping: loss {current_batch_loss:.4f} > threshold {self.config.early_stop_loss_threshold:.4f}, continuing optimization")
 
-                            # 计算动态置信度阈值
-                            if self.config.dynamic_confidence:
-                                # 线性递减：从初始置信度递减到接近0
-                                progress_ratio = step / max(1, self.config.num_steps - 1)  # 避免除0
-                                dynamic_threshold = self.config.early_stop_confidence * (1 - progress_ratio)
-                                dynamic_threshold = max(0.001, dynamic_threshold)  # 设置最小阈值，避免完全为0
+                        if loss_check_passed:
+                            # 如果贪心匹配成功且loss满足要求，检查置信度阈值（如果设置了）
+                            if self.config.early_stop_confidence is not None:
+                                # 计算目标token的置信度
+                                label_logits = torch.gather(shift_logits, -1, shift_labels.unsqueeze(-1)).squeeze(-1)
+                                target_probs = torch.softmax(label_logits, dim=-1)
 
-                                if self.config.verbosity != "WARNING":
-                                    print(f"Step {step}/{self.config.num_steps}: Dynamic confidence threshold = {dynamic_threshold:.3f} (initial: {self.config.early_stop_confidence:.3f}, current confidence: {max_confidence:.3f})")
+                                # 使用平均概率作为置信度指标
+                                avg_confidence = torch.mean(target_probs, dim=-1)
+                                max_confidence = torch.max(avg_confidence).item()
 
-                                confidence_threshold = dynamic_threshold
+                                # 计算动态置信度阈值
+                                if self.config.dynamic_confidence:
+                                    # 线性递减：从初始置信度递减到接近0
+                                    progress_ratio = step / max(1, self.config.num_steps - 1)  # 避免除0
+                                    dynamic_threshold = self.config.early_stop_confidence * (1 - progress_ratio)
+                                    dynamic_threshold = max(0.001, dynamic_threshold)  # 设置最小阈值，避免完全为0
+
+                                    if self.config.verbosity != "WARNING":
+                                        print(f"Step {step}/{self.config.num_steps}: Dynamic confidence threshold = {dynamic_threshold:.3f} (initial: {self.config.early_stop_confidence:.3f}, current confidence: {max_confidence:.3f})")
+
+                                    confidence_threshold = dynamic_threshold
+                                else:
+                                    confidence_threshold = self.config.early_stop_confidence
+
+                                # 检查是否满足置信度阈值
+                                if max_confidence >= confidence_threshold:
+                                    if self.config.verbosity != "WARNING":  # 避免在batch模式下输出过多信息
+                                        if self.config.early_stop_loss_threshold is not None:
+                                            print(f"Early stopping: greedy match achieved with loss {current_batch_loss:.4f} <= {self.config.early_stop_loss_threshold:.4f} and confidence {max_confidence:.3f} >= {confidence_threshold:.3f}")
+                                        else:
+                                            print(f"Early stopping: greedy match achieved with loss {current_batch_loss:.4f} and confidence {max_confidence:.3f} >= {confidence_threshold:.3f}")
+                                    self.stop_flag = True
                             else:
-                                confidence_threshold = self.config.early_stop_confidence
-
-                            # 检查是否满足置信度阈值
-                            if max_confidence >= confidence_threshold:
-                                if self.config.verbosity != "WARNING":  # 避免在batch模式下输出过多信息
-                                    print(f"Early stopping: greedy match achieved with confidence {max_confidence:.3f} >= {confidence_threshold:.3f}")
+                                # 没有设置置信度阈值，检查loss后直接早停
+                                if self.config.verbosity != "WARNING":
+                                    if self.config.early_stop_loss_threshold is not None:
+                                        print(f"Early stopping: greedy match achieved with loss {current_batch_loss:.4f} <= {self.config.early_stop_loss_threshold:.4f}")
+                                    else:
+                                        print(f"Early stopping: greedy match achieved with loss {current_batch_loss:.4f}")
                                 self.stop_flag = True
-                        else:
-                            # 没有设置置信度阈值，直接早停
-                            self.stop_flag = True
 
                 del outputs
                 gc.collect()

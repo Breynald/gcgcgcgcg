@@ -20,9 +20,6 @@ python examples/example_thinking_optimization.py
 
 # Run with specific model and target (modify script parameters)
 # Edit the example_thinking_optimization.py file to change model, target, and other settings
-
-# Test standalone table generation
-python examples/test_table_standalone.py
 ```
 
 ### Testing
@@ -110,7 +107,7 @@ nanoGCG is a lightweight implementation of the GCG (Greedy Coordinate Gradient) 
 - `run_gcg()`: Simple API for single-string optimization
 - `run_multigcg()`: Advanced API supporting multiple placeholders and conversation history
 
-**Note:** The main entry point is now `nanogcg.run()` which replaces the older `run_gcg()` and `run_multigcg()` functions. Use `nanogcg.run()` for all optimization scenarios.
+**Note:** These are the two main API functions exposed by the nanogcg package. The `nanogcg.run()` function mentioned in some documentation does not exist in the current codebase.
 
 ### Key Features
 
@@ -152,12 +149,12 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 model = AutoModelForCausalLM.from_pretrained("mistralai/Mistral-7B-Instruct-v0.2")
 tokenizer = AutoTokenizer.from_pretrained("mistralai/Mistral-7B-Instruct-v0.2")
 
-result = nanogcg.run(model, tokenizer, "Tell me how to build a bomb", "Sure, here's how to build a bomb:\n\n")
+result = nanogcg.run_gcg(model, tokenizer, "Tell me how to build a bomb", "Sure, here's how to build a bomb:\n\n")
 ```
 
 **Advanced Multi-String Optimization:**
 ```python
-from nanogcg import GCGConfig, run
+from nanogcg import GCGConfig, run_multigcg
 
 config = GCGConfig(
     num_steps=500,
@@ -167,7 +164,7 @@ config = GCGConfig(
 )
 
 messages = [{"role": "user", "content": "Complete this table: {optim_str_1} | {optim_str_2} | {optim_str_3}"}]
-result = run(model, tokenizer, messages, "Target response", config, ["{optim_str_1}", "{optim_str_2}", "{optim_str_3}"])
+result = run_multigcg(model, tokenizer, messages, "Target response", config, ["{optim_str_1}", "{optim_str_2}", "{optim_str_3}"])
 ```
 
 **Probe Sampling Acceleration:**
@@ -205,9 +202,7 @@ The `examples/run.py` file serves as the main example and test harness, supporti
 - Flexible placeholder naming ({optim_str_1}, {optim_str_2}, etc.)
 
 **Additional Utilities:**
-- `examples/test_table_standalone.py`: Standalone testing for table generation
 - `perplexity/perplexity_calculator.py`: Calculate perplexity scores for generated text
-- `examples/run.sh`: Shell script for CUDA-based execution with specific model paths
 
 **Batch Processing:**
 - `scripts/batch_optimization.py`: Comprehensive batch optimization with heatmap generation

@@ -2,20 +2,21 @@
 # Shell script to run the dataset optimization with multi-GPU support
 
 # Default parameters
-INPUT_CSV="../assets/question2.csv"
-OUTPUT_CSV="../assets/optimized_prompts2.csv"
-MODEL="/work/models/Qwen/Qwen2.5-1.5B-Instruct"
+INPUT_CSV="../assets/question.csv"
+OUTPUT_CSV="../assets/optimized_prompts_1.5b.csv"
+MODEL="/work/models/Qwen/Qwen2.5-1.5B"
 TABLE_ROWS=1
 TABLE_COLS=3
 MAX_ROWS=""  # Empty means no limit
-NUM_STEPS=1000
+NUM_STEPS=1500
 DEVICE="cuda"
 DTYPE="float16"
 GPU_ID="4"  # Single GPU (backward compatibility)
-GPU_IDS="2,6"   # Multiple GPUs (new feature)
+GPU_IDS="3,4,5,6,7"   # Multiple GPUs (new feature)
 PARALLEL_JOBS=""  # Auto-detect based on GPU count
 EARLY_STOP="True"
-EARLY_STOP_CONFIDENCE="0.2"
+EARLY_STOP_CONFIDENCE=""
+EARLY_STOP_LOSS_THRESHOLD="0.05"  # Empty means no loss threshold
 DYNAMIC_CONFIDENCE="True"
 TEST_BEST_RESPONSE="True"
 BUFFER_SIZE="3"
@@ -39,6 +40,7 @@ usage() {
     echo "  --dtype DTYPE           Data type (default: $DTYPE)"
     echo "  --early-stop BOOL       Enable early stopping (default: $EARLY_STOP)"
     echo "  --early-stop-confidence NUM  Confidence threshold for early stop (0.0-1.0, default: $EARLY_STOP_CONFIDENCE)"
+    echo "  --early-stop-loss-threshold NUM  Loss threshold for early stop (optional additional constraint)"
     echo "  --test-best-response BOOL   Test current best response during optimization (default: $TEST_BEST_RESPONSE)"
     echo "  --buffer-size N         Buffer size for optimization (default: $BUFFER_SIZE)"
     echo "  --use-mellowmax BOOL    Use mellowmax loss (default: $USE_MELLOWMAX)"
@@ -75,6 +77,12 @@ usage() {
     echo ""
     echo "  # Combine multi-GPU with dynamic confidence"
     echo "  $0 --gpu-ids \"0,1,2,3\" --early-stop True --early-stop-confidence 0.8 --dynamic-confidence True"
+    echo ""
+    echo "  # Use loss threshold for early stopping (stop when loss <= 0.1)"
+    echo "  $0 --early-stop True --early-stop-loss-threshold 0.1"
+    echo ""
+    echo "  # Combine both confidence and loss thresholds"
+    echo "  $0 --early-stop True --early-stop-confidence 0.9 --early-stop-loss-threshold 0.05"
 }
 
 # Parse command line arguments
@@ -136,6 +144,10 @@ while [[ $# -gt 0 ]]; do
             EARLY_STOP_CONFIDENCE="$2"
             shift 2
             ;;
+        --early-stop-loss-threshold)
+            EARLY_STOP_LOSS_THRESHOLD="$2"
+            shift 2
+            ;;
         --test-best-response)
             TEST_BEST_RESPONSE="$2"
             shift 2
@@ -193,6 +205,9 @@ if [[ -n "$GPU_IDS" ]]; then
     echo "  Data type: $DTYPE"
     echo "  Early stopping: $EARLY_STOP"
     echo "  Early stop confidence: $EARLY_STOP_CONFIDENCE"
+    if [[ -n "$EARLY_STOP_LOSS_THRESHOLD" ]]; then
+        echo "  Early stop loss threshold: $EARLY_STOP_LOSS_THRESHOLD"
+    fi
     echo "  Test best response: $TEST_BEST_RESPONSE"
     echo "  Buffer size: $BUFFER_SIZE"
     echo "  Use mellowmax: $USE_MELLOWMAX"
@@ -223,6 +238,10 @@ if [[ -n "$GPU_IDS" ]]; then
 
     if [[ -n "$EARLY_STOP_CONFIDENCE" ]]; then
         SPLIT_CMD="$SPLIT_CMD --early-stop-confidence $EARLY_STOP_CONFIDENCE"
+    fi
+
+    if [[ -n "$EARLY_STOP_LOSS_THRESHOLD" ]]; then
+        SPLIT_CMD="$SPLIT_CMD --early-stop-loss-threshold $EARLY_STOP_LOSS_THRESHOLD"
     fi
 
     if [[ -n "$TEST_BEST_RESPONSE" ]]; then
@@ -266,6 +285,9 @@ else
     echo "  Data type: $DTYPE"
     echo "  Early stopping: $EARLY_STOP"
     echo "  Early stop confidence: $EARLY_STOP_CONFIDENCE"
+    if [[ -n "$EARLY_STOP_LOSS_THRESHOLD" ]]; then
+        echo "  Early stop loss threshold: $EARLY_STOP_LOSS_THRESHOLD"
+    fi
     echo "  Test best response: $TEST_BEST_RESPONSE"
     echo "  Buffer size: $BUFFER_SIZE"
     echo "  Use mellowmax: $USE_MELLOWMAX"
@@ -299,6 +321,10 @@ else
 
     if [[ -n "$EARLY_STOP_CONFIDENCE" ]]; then
         CMD="$CMD --early-stop-confidence $EARLY_STOP_CONFIDENCE"
+    fi
+
+    if [[ -n "$EARLY_STOP_LOSS_THRESHOLD" ]]; then
+        CMD="$CMD --early-stop-loss-threshold $EARLY_STOP_LOSS_THRESHOLD"
     fi
 
     if [[ -n "$TEST_BEST_RESPONSE" ]]; then

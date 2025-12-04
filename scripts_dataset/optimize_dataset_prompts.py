@@ -141,6 +141,9 @@ def run_single_gpu_job(args, gpu_id: int, input_csv: str, output_csv: str) -> No
     if args.early_stop_confidence is not None:
         cmd.extend(["--early-stop-confidence", str(args.early_stop_confidence)])
 
+    if args.early_stop_loss_threshold is not None:
+        cmd.extend(["--early-stop-loss-threshold", str(args.early_stop_loss_threshold)])
+
     if args.test_best_response:
         cmd.extend(["--test-best-response", str(args.test_best_response).lower()])
 
@@ -255,6 +258,7 @@ def run_multi_gpu_optimization_improved(args, gpu_ids: List[int], num_jobs: int)
                             (["--max-rows", str(args.max_rows)] if args.max_rows else []) +
                             ["--early-stop", args.early_stop] +
                             (["--early-stop-confidence", str(args.early_stop_confidence)] if args.early_stop_confidence is not None else []) +
+                            (["--early-stop-loss-threshold", str(args.early_stop_loss_threshold)] if args.early_stop_loss_threshold is not None else []) +
                             ["--dynamic-confidence", str(args.dynamic_confidence).lower()] +
                             ["--test-best-response", str(args.test_best_response).lower()],
                             stdout=open(stdout_file, 'w'),
@@ -465,6 +469,7 @@ def run_multi_gpu_optimization(args, gpu_ids: List[int], num_jobs: int) -> None:
                     (["--max-rows", str(args.max_rows)] if args.max_rows else []) +
                     ["--early-stop", args.early_stop] +
                     (["--early-stop-confidence", str(args.early_stop_confidence)] if args.early_stop_confidence is not None else []) +
+                            (["--early-stop-loss-threshold", str(args.early_stop_loss_threshold)] if args.early_stop_loss_threshold is not None else []) +
                     ["--dynamic-confidence", str(args.dynamic_confidence).lower()] +
                     ["--test-best-response", str(args.test_best_response).lower()],
                     stdout=open(stdout_file, 'w'),
@@ -763,7 +768,7 @@ def save_optimized_results(
         # Create base result entry
         result_entry = {
             'question': row['question'],
-            'target_answer': row['answer'],
+            'target_answer': row.get('answer', row.get('target', '')),  # Support both column names
             'keyword': row.get('keyword', ''),
             'best_loss': result.best_loss,
             'num_placeholders': len(placeholders),
@@ -845,6 +850,8 @@ def main():
                        help="Enable early stopping (default: True)")
     parser.add_argument("--early-stop-confidence", type=float, default=None,
                        help="Confidence threshold for early stopping (0.0-1.0, only used if early_stop=True)")
+    parser.add_argument("--early-stop-loss-threshold", type=float, default=None,
+                       help="Loss threshold for early stopping (optional additional constraint)")
     parser.add_argument("--dynamic-confidence", type=lambda x: x.lower() == 'true', default=False,
                        help="Use dynamic confidence that decreases over steps (default: False)")
     parser.add_argument("--test-best-response", type=lambda x: x.lower() == 'true', default=False,
@@ -928,6 +935,7 @@ def main():
         use_mellowmax=args.use_mellowmax,
         early_stop=args.early_stop == "True",
         early_stop_confidence=args.early_stop_confidence,
+        early_stop_loss_threshold=args.early_stop_loss_threshold,
         dynamic_confidence=args.dynamic_confidence,  # 启用动态置信度
         test_best_response=args.test_best_response,  # 启用实时测试最佳回答
         use_prefix_cache=False,  # Disable prefix cache to avoid issues

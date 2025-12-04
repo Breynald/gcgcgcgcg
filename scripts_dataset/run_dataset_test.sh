@@ -2,12 +2,12 @@
 # Shell script to test optimized prompts
 
 # Default parameters
-INPUT_CSV="../assets/optimized_prompts.csv"
+INPUT_CSV="../assets/optimized_prompts_1.5b_2.csv"
 # MODEL="/work/models/Qwen/Qwen2.5-7B-Instruct"
 # MODEL="/work/models/meta-llama/Llama-3.1-8B-Instruct"
-MODEL="/work/models/Qwen/Qwen2.5-1.5B-Instruct"
+MODEL="/work/models/Qwen/Qwen2.5-1.5B"
 # MODEL="/work/models/lora/sft/alpaca"
-DEVICE="cuda:6"
+DEVICE="cuda:5"
 DTYPE="float16"
 MAX_ROWS=""
 MAX_NEW_TOKENS=""
