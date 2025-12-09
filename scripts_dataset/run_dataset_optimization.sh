@@ -2,8 +2,8 @@
 # Shell script to run the dataset optimization with multi-GPU support
 
 # Default parameters
-INPUT_CSV="../assets/question.csv"
-OUTPUT_CSV="../assets/optimized_prompts_1.5b.csv"
+INPUT_CSV="../assets/question2.csv"
+OUTPUT_CSV="../assets/optimized_prompts_1.5b_2.csv"
 MODEL="/work/models/Qwen/Qwen2.5-1.5B"
 TABLE_ROWS=1
 TABLE_COLS=3
@@ -12,7 +12,7 @@ NUM_STEPS=1500
 DEVICE="cuda"
 DTYPE="float16"
 GPU_ID="4"  # Single GPU (backward compatibility)
-GPU_IDS="3,4,5,6,7"   # Multiple GPUs (new feature)
+GPU_IDS="1,2,3,4,5,6,7"   # Multiple GPUs (new feature)
 PARALLEL_JOBS=""  # Auto-detect based on GPU count
 EARLY_STOP="True"
 EARLY_STOP_CONFIDENCE=""
@@ -21,6 +21,7 @@ DYNAMIC_CONFIDENCE="True"
 TEST_BEST_RESPONSE="True"
 BUFFER_SIZE="3"
 USE_MELLOWMAX="False"
+OPTIM_STR_INIT=""  # Empty means use default
 
 # Function to display usage
 usage() {
@@ -45,6 +46,7 @@ usage() {
     echo "  --buffer-size N         Buffer size for optimization (default: $BUFFER_SIZE)"
     echo "  --use-mellowmax BOOL    Use mellowmax loss (default: $USE_MELLOWMAX)"
     echo "  --dynamic-confidence BOOL   Use dynamic confidence that decreases over steps (default: $DYNAMIC_CONFIDENCE)"
+    echo "  --optim-str-init STR    Initial optimization string (default: use default)"
     echo "  --help                  Show this help message"
     echo ""
     echo "Examples:"
@@ -164,6 +166,10 @@ while [[ $# -gt 0 ]]; do
             DYNAMIC_CONFIDENCE="$2"
             shift 2
             ;;
+        --optim-str-init)
+            OPTIM_STR_INIT="$2"
+            shift 2
+            ;;
         --help)
             usage
             exit 0
@@ -248,6 +254,10 @@ if [[ -n "$GPU_IDS" ]]; then
         SPLIT_CMD="$SPLIT_CMD --test-best-response $TEST_BEST_RESPONSE"
     fi
 
+    if [[ -n "$OPTIM_STR_INIT" ]]; then
+        SPLIT_CMD="$SPLIT_CMD --optim-str-init '$OPTIM_STR_INIT'"
+    fi
+
     # Add multi-GPU specific parameters
     SPLIT_CMD="$SPLIT_CMD --multi-gpu --gpu-ids '$GPU_IDS' --parallel-jobs $PARALLEL_COUNT --temp-dir '$TEMP_DIR'"
 
@@ -329,6 +339,10 @@ else
 
     if [[ -n "$TEST_BEST_RESPONSE" ]]; then
         CMD="$CMD --test-best-response $TEST_BEST_RESPONSE"
+    fi
+
+    if [[ -n "$OPTIM_STR_INIT" ]]; then
+        CMD="$CMD --optim-str-init '$OPTIM_STR_INIT'"
     fi
 
     echo "Starting single-GPU optimization..."

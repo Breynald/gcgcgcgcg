@@ -856,6 +856,8 @@ def main():
                        help="Use dynamic confidence that decreases over steps (default: False)")
     parser.add_argument("--test-best-response", type=lambda x: x.lower() == 'true', default=False,
                        help="Test current best response during optimization (default: False)")
+    parser.add_argument("--optim-str-init", type=str, default="x x x x x x x x x x x x x x x x x x x x",
+                       help="Initial optimization string (default: 20 'x' tokens separated by spaces)")
     parser.add_argument("--buffer-size", type=int, default=3,
                        help="Buffer size for optimization (default: 3)")
     parser.add_argument("--use-mellowmax", type=lambda x: x.lower() == 'true', default=False,
@@ -938,6 +940,7 @@ def main():
         early_stop_loss_threshold=args.early_stop_loss_threshold,
         dynamic_confidence=args.dynamic_confidence,  # 启用动态置信度
         test_best_response=args.test_best_response,  # 启用实时测试最佳回答
+        optim_str_init=args.optim_str_init,  # Custom initial optimization string
         use_prefix_cache=False,  # Disable prefix cache to avoid issues
         filter_ids=False  # Disable token filtering to prevent optimization failures
     )
