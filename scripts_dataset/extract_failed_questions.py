@@ -31,9 +31,13 @@ def test_single_prompt(model, tokenizer, prompt: str, target: str, max_new_token
         # Use provided max_new_tokens or calculated target tokens, whichever is larger
         final_max_tokens = max(max_new_tokens or 0, target_tokens)
 
-        # Apply chat template (consistent with multigcg.py)
-        messages = [{"role": "user", "content": prompt}]
-        final_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        # Apply chat template if available (for models without chat_template like Llama 2)
+        if hasattr(tokenizer, 'chat_template') and tokenizer.chat_template:
+            messages = [{"role": "user", "content": prompt}]
+            final_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        else:
+            # For models without chat_template, use prompt directly
+            final_prompt = prompt
 
         # Handle BOS token (consistent with multigcg.py:281-282)
         if tokenizer.bos_token and final_prompt.startswith(tokenizer.bos_token):

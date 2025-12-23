@@ -3,8 +3,8 @@
 
 # Default parameters
 INITIAL_CSV="../assets/question.csv"
-MAIN_OUTPUT_CSV="../assets/optimized_prompts_1.5b.csv"
-ITERATIVE_CSV="../assets/optimized_prompts_1.5b_2.csv"
+MAIN_OUTPUT_CSV="../assets/optimized_prompts_1.5b_10init.csv"
+ITERATIVE_CSV="../assets/optimized_prompts_1.5b_10init_2.csv"
 FAILED_CSV="../assets/question2.csv"
 MODEL="/work/models/Qwen/Qwen2.5-1.5B"
 DEVICE="cuda:4"
@@ -13,7 +13,7 @@ TABLE_ROWS=1
 TABLE_COLS=3
 MAX_ROWS=""  # Empty means no limit
 NUM_STEPS=1500
-GPU_IDS="2,4,6"  # Single GPU by default
+GPU_IDS="2,4,5"  # Single GPU by default
 EARLY_STOP="True"
 EARLY_STOP_CONFIDENCE=""
 EARLY_STOP_LOSS_THRESHOLD="0.05"
@@ -21,6 +21,7 @@ DYNAMIC_CONFIDENCE="True"
 TEST_BEST_RESPONSE="True"
 BUFFER_SIZE="3"
 USE_MELLOWMAX="False"
+OPTIM_STR_INIT="x x x x x x x x x x x x x x "  # Empty means use default initial optimization text
 MAX_ITERATIONS=10  # Maximum number of optimization iterations to prevent infinite loops
 
 # Function to display usage
@@ -48,6 +49,7 @@ usage() {
     echo "  --buffer-size N          Buffer size for optimization (default: $BUFFER_SIZE)"
     echo "  --use-mellowmax BOOL     Use mellowmax loss (default: $USE_MELLOWMAX)"
     echo "  --dynamic-confidence BOOL Use dynamic confidence (default: $DYNAMIC_CONFIDENCE)"
+    echo "  --optim-str-init STR     Initial optimization string (default: use default)"
     echo "  --max-iterations N       Maximum optimization iterations (default: $MAX_ITERATIONS)"
     echo "  --help                   Show this help message"
     echo ""
@@ -139,6 +141,10 @@ while [[ $# -gt 0 ]]; do
             DYNAMIC_CONFIDENCE="$2"
             shift 2
             ;;
+        --optim-str-init)
+            OPTIM_STR_INIT="$2"
+            shift 2
+            ;;
         --max-iterations)
             MAX_ITERATIONS="$2"
             shift 2
@@ -200,6 +206,10 @@ run_optimization() {
     OPT_CMD="$OPT_CMD --use-mellowmax $USE_MELLOWMAX"
     OPT_CMD="$OPT_CMD --dynamic-confidence $DYNAMIC_CONFIDENCE"
     OPT_CMD="$OPT_CMD --early-stop-loss-threshold $EARLY_STOP_LOSS_THRESHOLD"
+
+    if [[ -n "$OPTIM_STR_INIT" ]]; then
+        OPT_CMD="$OPT_CMD --optim-str-init '$OPTIM_STR_INIT'"
+    fi
 
     if [[ -n "$MAX_ROWS" ]]; then
         OPT_CMD="$OPT_CMD --max-rows $MAX_ROWS"

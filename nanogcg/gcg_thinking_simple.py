@@ -335,7 +335,17 @@ class GCGThinking:
         if not any(["{optim_str}" in d["content"] for d in messages]):
             messages[-1]["content"] = messages[-1]["content"] + "{optim_str}"
 
-        template = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        # Apply chat template if available (for models without chat_template like Llama 2)
+        if hasattr(tokenizer, 'chat_template') and tokenizer.chat_template:
+            template = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        else:
+            # For models without chat_template, extract content directly from messages
+            if len(messages) == 1 and messages[0]["role"] == "user":
+                template = messages[0]["content"]
+            else:
+                # For multi-turn conversations, concatenate messages
+                template = "\n\n".join([f"{msg['role']}: {msg['content']}" for msg in messages])
+
         if tokenizer.bos_token and template.startswith(tokenizer.bos_token):
             template = template.replace(tokenizer.bos_token, "")
         before_str, after_str = template.split("{optim_str}")
@@ -497,7 +507,17 @@ class GCGThinking:
         if not any(["{optim_str}" in d["content"] for d in messages]):
             messages[-1]["content"] = messages[-1]["content"] + "{optim_str}"
 
-        template = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        # Apply chat template if available (for models without chat_template like Llama 2)
+        if hasattr(tokenizer, 'chat_template') and tokenizer.chat_template:
+            template = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        else:
+            # For models without chat_template, extract content directly from messages
+            if len(messages) == 1 and messages[0]["role"] == "user":
+                template = messages[0]["content"]
+            else:
+                # For multi-turn conversations, concatenate messages
+                template = "\n\n".join([f"{msg['role']}: {msg['content']}" for msg in messages])
+
         if tokenizer.bos_token and template.startswith(tokenizer.bos_token):
             template = template.replace(tokenizer.bos_token, "")
         before_str, after_str = template.split("{optim_str}")
